@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://5h3jsfgmmdng"]
+[gd_scene load_steps=15 format=3 uid="uid://5h3jsfgmmdng"]
 
 [ext_resource type="Texture2D" uid="uid://g80mjf3gu427" path="res://Free Pixel Art Forest/PNG/Background layers/Layer_0011_0.png" id="1_kn47m"]
 [ext_resource type="Texture2D" uid="uid://b7x1jl36la2th" path="res://Free Pixel Art Forest/PNG/Background layers/Layer_0010_1.png" id="1_wapcf"]
@@ -12,8 +12,14 @@
 [ext_resource type="Texture2D" uid="uid://cbo265s477tkx" path="res://Free Pixel Art Forest/PNG/Background layers/Layer_0002_7.png" id="10_13fbl"]
 [ext_resource type="Texture2D" uid="uid://cjx4lkqqvjsgx" path="res://Free Pixel Art Forest/PNG/Background layers/Layer_0001_8.png" id="11_ckce3"]
 [ext_resource type="Texture2D" uid="uid://pnqkeeof6k4o" path="res://Free Pixel Art Forest/PNG/Background layers/Layer_0000_9.png" id="12_ygn7q"]
+[ext_resource type="PackedScene" uid="uid://blbs5jbyvy4o0" path="res://player.tscn" id="13_o5ihv"]
+[ext_resource type="PackedScene" uid="uid://c2c3t4kvfvjj8" path="res://platform.tscn" id="14_7mihy"]
 
-[node name="Node2D" type="Node2D"]
+[node name="main" type="Node2D"]
+
+[node name="Platform" parent="." instance=ExtResource("14_7mihy")]
+position = Vector2(-134, -51)
+scale = Vector2(1.405, 1.405)
 
 [node name="BGContainer" type="Node2D" parent="."]
 
@@ -76,3 +82,6 @@ texture = ExtResource("11_ckce3")
 position = Vector2(625, 181)
 scale = Vector2(1.40598, 1.26976)
 texture = ExtResource("12_ygn7q")
+
+[node name="Player" parent="." instance=ExtResource("13_o5ihv")]
+position = Vector2(555, 584)
