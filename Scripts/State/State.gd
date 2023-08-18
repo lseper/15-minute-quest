@@ -1,10 +1,19 @@
 class_name State extends Node
 
-func handle_input(player: CharacterBody2D, player_animation: AnimatedSprite2D, input: InputEvent) -> State:
-	return null
-	
-func update(player: CharacterBody2D, player_animation: AnimatedSprite2D) -> State:
-	return null
+@export var can_move: bool = true
+var next_state: State
 
-func enter(player: CharacterBody2D, player_animation: AnimatedSprite2D):
-	return null
+var character: CharacterBody2D
+var playback: AnimationNodeStateMachinePlayback
+
+func state_input(event: InputEvent):
+	pass
+	
+func state_process(delta):
+	pass
+
+func on_enter():
+	pass
+
+func on_exit():
+	pass

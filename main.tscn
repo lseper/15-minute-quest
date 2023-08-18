@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://5h3jsfgmmdng"]
+[gd_scene load_steps=17 format=3 uid="uid://5h3jsfgmmdng"]
 
 [ext_resource type="Texture2D" uid="uid://g80mjf3gu427" path="res://Free Pixel Art Forest/PNG/Background layers/Layer_0011_0.png" id="1_kn47m"]
 [ext_resource type="Texture2D" uid="uid://b7x1jl36la2th" path="res://Free Pixel Art Forest/PNG/Background layers/Layer_0010_1.png" id="1_wapcf"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://pnqkeeof6k4o" path="res://Free Pixel Art Forest/PNG/Background layers/Layer_0000_9.png" id="12_ygn7q"]
 [ext_resource type="PackedScene" uid="uid://blbs5jbyvy4o0" path="res://player.tscn" id="13_o5ihv"]
 [ext_resource type="PackedScene" uid="uid://c2c3t4kvfvjj8" path="res://platform.tscn" id="14_7mihy"]
+[ext_resource type="PackedScene" uid="uid://n36m4g1n6m8i" path="res://enemy.tscn" id="15_rk5qs"]
+[ext_resource type="PackedScene" uid="uid://bur17eiy2fcxx" path="res://health_changed_manager.tscn" id="16_jsobg"]
 
 [node name="main" type="Node2D"]
 
@@ -85,3 +87,8 @@ texture = ExtResource("12_ygn7q")
 
 [node name="Player" parent="." instance=ExtResource("13_o5ihv")]
 position = Vector2(555, 584)
+
+[node name="Enemy" parent="." instance=ExtResource("15_rk5qs")]
+position = Vector2(610, 584)
+
+[node name="HealthChangedManager" parent="." instance=ExtResource("16_jsobg")]
