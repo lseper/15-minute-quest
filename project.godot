@@ -12,11 +12,10 @@ config_version=5
 
 config/name="15-minute-quest"
 config/features=PackedStringArray("4.1", "GL Compatibility")
-config/icon="res://icon.svg"
 
 [autoload]
 
-SignalBus="*res://signal_bus.gd"
+SignalBus="*res://Scripts/Global/signal_bus.gd"
 
 [physics]
 

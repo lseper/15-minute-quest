@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://5h3jsfgmmdng"]
+
+[ext_resource type="Texture2D" uid="uid://byd8yvghnpngt" path="res://Imported Assets/Free Pixel Art Forest/Preview/Background.png" id="1_khr1r"]
+[ext_resource type="PackedScene" uid="uid://blbs5jbyvy4o0" path="res://Scenes/Entities/player.tscn" id="13_o5ihv"]
+[ext_resource type="PackedScene" uid="uid://c2c3t4kvfvjj8" path="res://Scenes/platform.tscn" id="14_7mihy"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Platform" parent="." instance=ExtResource("14_7mihy")]
+position = Vector2(28, 111.5)
+
+[node name="Background_Placeholder" type="Sprite2D" parent="."]
+position = Vector2(566, 250.5)
+texture = ExtResource("1_khr1r")
+
+[node name="Player" parent="." instance=ExtResource("13_o5ihv")]
+position = Vector2(349, 545.5)
