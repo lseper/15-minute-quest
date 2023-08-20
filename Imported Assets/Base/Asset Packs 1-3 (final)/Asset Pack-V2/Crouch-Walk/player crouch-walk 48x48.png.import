@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cfl8l08n7wcut"
-path="res://.godot/imported/player crouch-walk 48x48.png-9b168c6abe630e0d223a7f2a4dc77070.ctex"
+path="res://.godot/imported/player crouch-walk 48x48.png-90e1206af637bc22f41a9af3bf4d8b35.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Imported Assets/Asset Packs 1-3 (final)/Asset Pack-V2/Crouch-Walk/player crouch-walk 48x48.png"
-dest_files=["res://.godot/imported/player crouch-walk 48x48.png-9b168c6abe630e0d223a7f2a4dc77070.ctex"]
+source_file="res://Imported Assets/Base/Asset Packs 1-3 (final)/Asset Pack-V2/Crouch-Walk/player crouch-walk 48x48.png"
+dest_files=["res://.godot/imported/player crouch-walk 48x48.png-90e1206af637bc22f41a9af3bf4d8b35.ctex"]
 
 [params]
 

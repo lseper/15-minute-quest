@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://4dg46ss4cfap"
-path="res://.godot/imported/Pixel Art Runner.png-6bc7c9980fcf5eea5740620b46dd3455.ctex"
+path="res://.godot/imported/Pixel Art Runner.png-e2bedc859aa531ee3b5dab443cedb76f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Imported Assets/Free Pixel Art Forest/You may also like/Pixel Art Runner.png"
-dest_files=["res://.godot/imported/Pixel Art Runner.png-6bc7c9980fcf5eea5740620b46dd3455.ctex"]
+source_file="res://Imported Assets/Background/Free Pixel Art Forest/You may also like/Pixel Art Runner.png"
+dest_files=["res://.godot/imported/Pixel Art Runner.png-e2bedc859aa531ee3b5dab443cedb76f.ctex"]
 
 [params]
 

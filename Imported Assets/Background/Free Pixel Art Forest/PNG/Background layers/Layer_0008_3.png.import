@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cfqsieswepgbp"
-path="res://.godot/imported/Layer_0008_3.png-ba29cb71bfc9c24b8d9a6e426153978c.ctex"
+path="res://.godot/imported/Layer_0008_3.png-7e6a321aeac12cfb70fba9ff3b953e7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Imported Assets/Free Pixel Art Forest/PNG/Background layers/Layer_0008_3.png"
-dest_files=["res://.godot/imported/Layer_0008_3.png-ba29cb71bfc9c24b8d9a6e426153978c.ctex"]
+source_file="res://Imported Assets/Background/Free Pixel Art Forest/PNG/Background layers/Layer_0008_3.png"
+dest_files=["res://.godot/imported/Layer_0008_3.png-7e6a321aeac12cfb70fba9ff3b953e7c.ctex"]
 
 [params]
 
