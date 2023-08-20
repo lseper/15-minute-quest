@@ -13,8 +13,8 @@
 [ext_resource type="Script" path="res://Scripts/State/AttackState.gd" id="11_jctj5"]
 [ext_resource type="Script" path="res://Scripts/State/SpecialState.gd" id="12_lltjg"]
 [ext_resource type="Script" path="res://Scripts/State/DeathState.gd" id="13_5tyc4"]
-[ext_resource type="Script" path="res://Scripts/Debug/VelocityDebugLabel.gd" id="14_a7q4y"]
-[ext_resource type="Script" path="res://Scripts/Debug/StateDebugLabel.gd" id="15_e8txo"]
+[ext_resource type="Script" path="res://Scripts/DebugScripts/VelocityDebugLabel.gd" id="14_74ke8"]
+[ext_resource type="Script" path="res://Scripts/DebugScripts/StateDebugLabel.gd" id="15_pkgcd"]
 [ext_resource type="Script" path="res://Scripts/Player/Sword.gd" id="16_w0tq7"]
 [ext_resource type="Script" path="res://Scenes/Entities/FacingCollisionShape2D.gd" id="17_866ep"]
 [ext_resource type="Script" path="res://Scenes/Entities/SpecialCollision.gd" id="18_exnyp"]
@@ -1017,7 +1017,7 @@ offset_top = -21.0
 offset_right = 85.0
 offset_bottom = 5.0
 text = "Velocity: "
-script = ExtResource("14_a7q4y")
+script = ExtResource("14_74ke8")
 player = NodePath("..")
 
 [node name="StateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
@@ -1026,7 +1026,7 @@ offset_top = -50.0
 offset_right = -4.0
 offset_bottom = -24.0
 text = "State: "
-script = ExtResource("15_e8txo")
+script = ExtResource("15_pkgcd")
 state_machine = NodePath("../CharacterStateMachine")
 
 [node name="Sword" type="Area2D" parent="." node_paths=PackedStringArray("player", "attack_collision_box", "special_collision_box")]
