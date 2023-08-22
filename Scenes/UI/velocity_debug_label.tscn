@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cld6xwqay6nub"]
+
+[ext_resource type="Script" path="res://Scripts/DebugScripts/VelocityDebugLabel.gd" id="1_k4uy4"]
+
+[node name="VelocityDebugLabel" type="Label" node_paths=PackedStringArray("player")]
+offset_left = 15.0
+offset_top = -21.0
+offset_right = 85.0
+offset_bottom = 5.0
+text = "Velocity: "
+script = ExtResource("1_k4uy4")
+player = NodePath("")

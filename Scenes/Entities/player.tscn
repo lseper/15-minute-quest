@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://blbs5jbyvy4o0"]
+[gd_scene load_steps=114 format=3 uid="uid://blbs5jbyvy4o0"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_narcn"]
 [ext_resource type="Texture2D" uid="uid://bj30t0o2uumvc" path="res://Assets/Player/Player Sword Long Stab 96x48-Sheet.png" id="2_qtdon"]
@@ -7,17 +7,18 @@
 [ext_resource type="Texture2D" uid="uid://b2bwqivtmxyud" path="res://Assets/Player/Player Sword Idle 48x48-Sheet.png" id="5_8x6ef"]
 [ext_resource type="Texture2D" uid="uid://3bo8staf8sig" path="res://Assets/Player/player jump 48x48-Sheet.png" id="6_01x7c"]
 [ext_resource type="Texture2D" uid="uid://ielrwuvxmiqm" path="res://Assets/Player/Player Sword Run 48x48-Sheet.png" id="7_heifn"]
-[ext_resource type="Script" path="res://Scripts/State/CharacterStateMachine.gd" id="8_xm4qh"]
-[ext_resource type="Script" path="res://Scripts/State/GroundState.gd" id="9_ojjok"]
-[ext_resource type="Script" path="res://Scripts/State/AirState.gd" id="10_oys7h"]
-[ext_resource type="Script" path="res://Scripts/State/AttackState.gd" id="11_jctj5"]
-[ext_resource type="Script" path="res://Scripts/State/SpecialState.gd" id="12_lltjg"]
-[ext_resource type="Script" path="res://Scripts/State/DeathState.gd" id="13_5tyc4"]
-[ext_resource type="Script" path="res://Scripts/DebugScripts/VelocityDebugLabel.gd" id="14_74ke8"]
-[ext_resource type="Script" path="res://Scripts/DebugScripts/StateDebugLabel.gd" id="15_pkgcd"]
+[ext_resource type="Script" path="res://Scripts/Player/State/CharacterStateMachine.gd" id="8_xm4qh"]
+[ext_resource type="Script" path="res://Scripts/Player/State/GroundState.gd" id="9_ojjok"]
+[ext_resource type="Script" path="res://Scripts/Player/State/AirState.gd" id="10_oys7h"]
+[ext_resource type="Script" path="res://Scripts/Player/State/AttackState.gd" id="11_jctj5"]
+[ext_resource type="Script" path="res://Scripts/Player/State/SpecialState.gd" id="12_lltjg"]
+[ext_resource type="Script" path="res://Scripts/Player/State/DeathState.gd" id="13_5tyc4"]
+[ext_resource type="PackedScene" uid="uid://cld6xwqay6nub" path="res://Scenes/UI/velocity_debug_label.tscn" id="14_7oqwt"]
+[ext_resource type="PackedScene" uid="uid://4japi0h1i07l" path="res://Scenes/UI/state_debug_label.tscn" id="15_jasu6"]
 [ext_resource type="Script" path="res://Scripts/Player/Sword.gd" id="16_w0tq7"]
-[ext_resource type="Script" path="res://Scenes/Entities/FacingCollisionShape2D.gd" id="17_866ep"]
-[ext_resource type="Script" path="res://Scenes/Entities/SpecialCollision.gd" id="18_exnyp"]
+[ext_resource type="Script" path="res://Scripts/Player/FacingCollisionShape2D.gd" id="17_866ep"]
+[ext_resource type="Script" path="res://Scripts/Player/SpecialCollision.gd" id="18_exnyp"]
+[ext_resource type="Script" path="res://Scripts/Damageable.gd" id="19_ocjkc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jgm4s"]
 radius = 7.0
@@ -469,7 +470,7 @@ states/special_recover/position = Vector2(564, 178.504)
 states/special_release/node = SubResource("AnimationNodeAnimation_5hopr")
 states/special_release/position = Vector2(382, 178.504)
 transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_6ggrk"), "move", "jump_ascend", SubResource("AnimationNodeStateMachineTransition_ga887"), "jump_ascend", "jump_max", SubResource("AnimationNodeStateMachineTransition_erwdl"), "jump_max", "jump_descend", SubResource("AnimationNodeStateMachineTransition_qwijt"), "jump_descend", "move", SubResource("AnimationNodeStateMachineTransition_w6ie7"), "move", "attack", SubResource("AnimationNodeStateMachineTransition_ck4i2"), "attack", "move", SubResource("AnimationNodeStateMachineTransition_gfkjr"), "special_charge", "special_release", SubResource("AnimationNodeStateMachineTransition_e7txt"), "special_release", "special_recover", SubResource("AnimationNodeStateMachineTransition_sabg2"), "move", "special_charge", SubResource("AnimationNodeStateMachineTransition_46l4l"), "special_recover", "move", SubResource("AnimationNodeStateMachineTransition_djvyg"), "death", "End", SubResource("AnimationNodeStateMachineTransition_327mo"), "jump_ascend", "death", SubResource("AnimationNodeStateMachineTransition_jc2hv"), "jump_max", "death", SubResource("AnimationNodeStateMachineTransition_uks45"), "jump_descend", "death", SubResource("AnimationNodeStateMachineTransition_4x8qg"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_7w5js"), "special_charge", "death", SubResource("AnimationNodeStateMachineTransition_df1mh"), "special_release", "death", SubResource("AnimationNodeStateMachineTransition_vnrf1"), "special_recover", "death", SubResource("AnimationNodeStateMachineTransition_k0vcu"), "move", "death", SubResource("AnimationNodeStateMachineTransition_47rst"), "jump_ascend", "attack", SubResource("AnimationNodeStateMachineTransition_i63dh"), "jump_max", "attack", SubResource("AnimationNodeStateMachineTransition_xwn6y"), "jump_descend", "attack", SubResource("AnimationNodeStateMachineTransition_47n1c")]
-graph_offset = Vector2(0, -61.4212)
+graph_offset = Vector2(-15.3975, -9.94119)
 
 [sub_resource type="Animation" id="Animation_aa4lj"]
 length = 0.5
@@ -949,8 +950,8 @@ position = Vector2(608, 357)
 script = ExtResource("1_narcn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_qtdon")
-hframes = 7
+texture = ExtResource("7_heifn")
+hframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_jgm4s")
@@ -1011,23 +1012,9 @@ script = ExtResource("13_5tyc4")
 death_node = "death"
 can_move = false
 
-[node name="VelocityDebugLabel" type="Label" parent="." node_paths=PackedStringArray("player")]
-offset_left = 15.0
-offset_top = -21.0
-offset_right = 85.0
-offset_bottom = 5.0
-text = "Velocity: "
-script = ExtResource("14_74ke8")
-player = NodePath("..")
+[node name="VelocityDebugLabel" parent="." instance=ExtResource("14_7oqwt")]
 
-[node name="StateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
-offset_left = -53.0
-offset_top = -50.0
-offset_right = -4.0
-offset_bottom = -24.0
-text = "State: "
-script = ExtResource("15_pkgcd")
-state_machine = NodePath("../CharacterStateMachine")
+[node name="StateDebugLabel" parent="." instance=ExtResource("15_jasu6")]
 
 [node name="Sword" type="Area2D" parent="." node_paths=PackedStringArray("player", "attack_collision_box", "special_collision_box")]
 script = ExtResource("16_w0tq7")
@@ -1050,6 +1037,10 @@ debug_color = Color(0.829096, 0.374124, 0.339421, 0.42)
 script = ExtResource("18_exnyp")
 facing_left_position = Vector2(-28, 6)
 facing_right_position = Vector2(28, 6)
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource("19_ocjkc")
+health = 200.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]

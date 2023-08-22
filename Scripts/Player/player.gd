@@ -5,15 +5,15 @@ class_name Player extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine: CharacterStateMachine = $CharacterStateMachine
+@onready var health : int = $Damageable.health
 
 signal facing_direction_changed(facing_right: bool)
 
-@export var health : int = 100
+@export var speed: int = 400
 # used for movement
 var direction = 0
 # used for directional attacks
 var facing : int = 1
-var SPEED = 400
 #var stab_velocity = 500
 #var stab_velocity_decay = 10
 
@@ -51,5 +51,5 @@ func _input(event):
 func _physics_process(delta):
 	velocity.y += gravity
 	if state_machine.check_if_can_move():	
-		velocity.x = SPEED * direction
+		velocity.x = speed * direction
 	move_and_slide()
