@@ -19,10 +19,11 @@ var facing : int = 1
 
 func _ready():
 	animation_tree.active = true
+	
 
 func update_animation_parameters():
 	animation_tree.set("parameters/move/blend_position", direction)
-	
+
 func update_facing_direction():
 	if health > 0 and state_machine.check_if_can_change_direction():
 		if direction > 0:
@@ -47,7 +48,10 @@ func _input(event):
 			direction = 1
 			facing = 1
 		update_facing_direction()
-	
+
+func _on_body_entered(body):
+	print(body.name)
+
 func _physics_process(delta):
 	velocity.y += gravity
 	if state_machine.check_if_can_move():	

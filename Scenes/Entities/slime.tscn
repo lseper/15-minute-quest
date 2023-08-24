@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c5mvsgp01m7ly"]
+[gd_scene load_steps=34 format=3 uid="uid://c5mvsgp01m7ly"]
 
 [ext_resource type="Texture2D" uid="uid://f6ljbeaghnea" path="res://Imported Assets/Enemies/Slimes/slime_idle1.png" id="1_oo1fs"]
 [ext_resource type="Script" path="res://Scripts/Enemy/slime.gd" id="1_vajoh"]
@@ -6,13 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://xmxqjacyog67" path="res://Imported Assets/Enemies/Slimes/slime_idle3.png" id="4_2byoi"]
 [ext_resource type="Texture2D" uid="uid://cbdkkj7v35l1d" path="res://Imported Assets/Enemies/Slimes/slime_move.png" id="5_ogvii"]
 [ext_resource type="Texture2D" uid="uid://okg5ltppltyg" path="res://Imported Assets/Enemies/Slimes/slime_die.png" id="6_vsd7r"]
-[ext_resource type="Script" path="res://Scripts/Player/State/CharacterStateMachine.gd" id="7_n7pvq"]
 [ext_resource type="Script" path="res://Scripts/Enemy/SlimeCollisionBox.gd" id="7_o7bff"]
+[ext_resource type="Script" path="res://Scripts/Enemy/State/SlimeStateMachine.gd" id="8_37uxy"]
 [ext_resource type="Script" path="res://Scripts/Enemy/State/SlimeGroundState.gd" id="8_57ldn"]
 [ext_resource type="Script" path="res://Scripts/Enemy/State/SlimeDeathState.gd" id="9_wmssj"]
 [ext_resource type="Script" path="res://Scripts/Damageable.gd" id="10_v44u5"]
+[ext_resource type="Script" path="res://Scripts/Enemy/State/SlimeSpawnState.gd" id="11_p2uk4"]
 [ext_resource type="PackedScene" uid="uid://4japi0h1i07l" path="res://Scenes/UI/state_debug_label.tscn" id="11_uuqok"]
 [ext_resource type="PackedScene" uid="uid://cld6xwqay6nub" path="res://Scenes/UI/velocity_debug_label.tscn" id="12_ius7r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbhfj"]
+size = Vector2(19.5, 14)
 
 [sub_resource type="Animation" id="Animation_mke2r"]
 length = 0.001
@@ -291,11 +295,11 @@ _data = {
 "move": SubResource("Animation_jphjt")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbhfj"]
-size = Vector2(19.5, 14)
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a2rha"]
 animation = &"death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_agjjr"]
+animation = &"idle_short"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t5ynd"]
 animation = &"move"
@@ -317,34 +321,40 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s77ur"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_acvri"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tykg1"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xn7cj"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tykg1"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rr0ww"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_s4mat"]
 states/Start/position = Vector2(200, 99.75)
 states/death/node = SubResource("AnimationNodeAnimation_a2rha")
-states/death/position = Vector2(524, 99.875)
+states/death/position = Vector2(700.5, 99.9375)
+states/idle_short/node = SubResource("AnimationNodeAnimation_agjjr")
+states/idle_short/position = Vector2(356.385, 99.875)
 states/move/node = SubResource("AnimationNodeBlendSpace1D_o8j3u")
-states/move/position = Vector2(353.885, 100.033)
-transitions = ["death", "End", SubResource("AnimationNodeStateMachineTransition_s77ur"), "Start", "move", SubResource("AnimationNodeStateMachineTransition_acvri"), "move", "death", SubResource("AnimationNodeStateMachineTransition_tykg1")]
+states/move/position = Vector2(537.885, 101.633)
+transitions = ["death", "End", SubResource("AnimationNodeStateMachineTransition_s77ur"), "move", "death", SubResource("AnimationNodeStateMachineTransition_tykg1"), "Start", "idle_short", SubResource("AnimationNodeStateMachineTransition_xn7cj"), "idle_short", "move", SubResource("AnimationNodeStateMachineTransition_rr0ww")]
 graph_offset = Vector2(92.3853, -6.43496)
 
 [node name="Slime" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_vajoh")
 speed = 50
+
+[node name="SlimeCollisionBox" type="CollisionShape2D" parent="."]
+position = Vector2(5, 4)
+shape = SubResource("RectangleShape2D_nbhfj")
+script = ExtResource("7_o7bff")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_nl3kh")
 }
-
-[node name="SlimeCollisionBox" type="CollisionShape2D" parent="."]
-position = Vector2(5, 4)
-shape = SubResource("RectangleShape2D_nbhfj")
-script = ExtResource("7_o7bff")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("5_ogvii")
@@ -356,12 +366,12 @@ vframes = 7
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_s4mat")
 anim_player = NodePath("../AnimationPlayer")
-parameters/move/blend_position = 0
+parameters/move/blend_position = -0.00243545
 
 [node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state", "animation_tree")]
-script = ExtResource("7_n7pvq")
+script = ExtResource("8_37uxy")
 character = NodePath("..")
-current_state = NodePath("SlimeGroundState")
+current_state = NodePath("SlimeSpawnState")
 animation_tree = NodePath("../AnimationTree")
 
 [node name="SlimeGroundState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("slime_death_state")]
@@ -372,6 +382,14 @@ ground_node = "move"
 
 [node name="SlimeDeathState" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("9_wmssj")
+
+[node name="SlimeSpawnState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("slime_collision_box", "slime_ground_state")]
+script = ExtResource("11_p2uk4")
+slime_collision_box = NodePath("../../SlimeCollisionBox")
+slime_ground_state = NodePath("../SlimeGroundState")
+slime_spawn_animation = "idle_short"
+can_move = false
+can_fall = false
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("10_v44u5")

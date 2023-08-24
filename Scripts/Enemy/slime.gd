@@ -7,9 +7,12 @@ class_name Slime extends Player
 # 1.0 - 2.0 = seeks player
 @export var seek_bias : float = 1.75
 @export var color: SlimeColor = SlimeColor.GREY
+@export var spawn_ceiling: int
 
 @onready var collision_box : SlimeCollisionBox = $SlimeCollisionBox
 
+# TODO: Extract this to a global enums script that autoloads all globally needed
+# enums (so you can directly access it in other scripts too)
 enum SlimeColor {
 	PINK,
 	RED,
@@ -51,7 +54,7 @@ func _input(event):
 
 func _physics_process(delta):
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() and state_machine.can_fall():
 		velocity.y += gravity
 	if state_machine.check_if_can_move():	
 		velocity.x = speed * direction
@@ -59,13 +62,13 @@ func _physics_process(delta):
 
 
 func _on_timer_timeout():
-	move()
+	if state_machine.check_if_can_move():
+		move()
 
 func _on_sprite_2d_frame_changed():
 	var new_frame_coords = Vector2i(sprite.frame % sprite.hframes, color)
 	if new_frame_coords != sprite.frame_coords:
 		sprite.frame_coords = new_frame_coords
-
 
 func _on_facing_direction_changed(facing_right):
 	if facing_right:

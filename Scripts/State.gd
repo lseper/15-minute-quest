@@ -2,6 +2,7 @@ class_name State extends Node
 
 @export var can_move: bool = true
 @export var can_change_direction: bool = true
+@export var can_fall: bool = true
 var next_state: State
 
 var character: CharacterBody2D

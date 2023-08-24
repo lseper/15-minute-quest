@@ -22,6 +22,7 @@ func _ready():
 			child.playback = animation_tree["parameters/playback"]
 		else:
 			push_warning("Child" + child.name + " is not a State for CharacterStateMachine")
+	current_state.on_enter()
 
 func switch_states(new_state: State):
 	if current_state != null:
