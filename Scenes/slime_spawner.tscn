@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6vw65653q1m1"]
+
+[ext_resource type="Script" path="res://Scenes/EnemySpawner.gd" id="1_gnt2c"]
+[ext_resource type="PackedScene" uid="uid://c5mvsgp01m7ly" path="res://Scenes/Entities/slime.tscn" id="2_blcjo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgkqh"]
+size = Vector2(917, 62)
+
+[node name="SlimeSpawner" type="Area2D" node_paths=PackedStringArray("player")]
+collision_mask = 63
+script = ExtResource("1_gnt2c")
+enemy = ExtResource("2_blcjo")
+player = NodePath("")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(537.5, 504.5)
+shape = SubResource("RectangleShape2D_pgkqh")
+debug_color = Color(0.866667, 0, 0.854902, 0.419608)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

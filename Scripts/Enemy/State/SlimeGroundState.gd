@@ -1,9 +1,9 @@
 class_name SlimeGroundState extends State
 
 @export var slime_death_state: State
-
 @export var movement_animation: String
 @export var ground_node: String
+@export var damageable_node: Damageable
 
 func on_enter():
 	playback.travel(ground_node)
@@ -14,4 +14,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if damageable_node.health <= 0:
+		next_state = slime_death_state

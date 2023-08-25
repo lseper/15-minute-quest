@@ -1,12 +1,13 @@
-class_name AttackCollision extends CollisionShape2D
+extends Label
 
-@export var facing_left_position: Vector2
-@export var facing_right_position: Vector2
+@export var player: Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if player != null:
+		text = "Health: %i" % player.health

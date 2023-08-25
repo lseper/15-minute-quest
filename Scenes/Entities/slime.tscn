@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c5mvsgp01m7ly"]
+[gd_scene load_steps=35 format=3 uid="uid://c5mvsgp01m7ly"]
 
 [ext_resource type="Texture2D" uid="uid://f6ljbeaghnea" path="res://Imported Assets/Enemies/Slimes/slime_idle1.png" id="1_oo1fs"]
 [ext_resource type="Script" path="res://Scripts/Enemy/slime.gd" id="1_vajoh"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemy/State/SlimeSpawnState.gd" id="11_p2uk4"]
 [ext_resource type="PackedScene" uid="uid://4japi0h1i07l" path="res://Scenes/UI/state_debug_label.tscn" id="11_uuqok"]
 [ext_resource type="PackedScene" uid="uid://cld6xwqay6nub" path="res://Scenes/UI/velocity_debug_label.tscn" id="12_ius7r"]
+[ext_resource type="Script" path="res://Scripts/DebugScripts/HealthDebugLabel.gd" id="15_vs56u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbhfj"]
 size = Vector2(19.5, 14)
@@ -374,26 +375,36 @@ character = NodePath("..")
 current_state = NodePath("SlimeSpawnState")
 animation_tree = NodePath("../AnimationTree")
 
-[node name="SlimeGroundState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("slime_death_state")]
+[node name="SlimeGroundState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("slime_death_state", "damageable_node")]
 script = ExtResource("8_57ldn")
 slime_death_state = NodePath("../SlimeDeathState")
 movement_animation = "move"
 ground_node = "move"
+damageable_node = NodePath("../../Damageable")
 
-[node name="SlimeDeathState" type="Node" parent="CharacterStateMachine"]
+[node name="SlimeDeathState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("root_slime_node", "slime_collision_box")]
 script = ExtResource("9_wmssj")
+slime_death_node = "death"
+slime_death_animation = "death"
+root_slime_node = NodePath("../..")
+slime_collision_box = NodePath("../../SlimeCollisionBox")
+can_move = false
+can_change_direction = false
+can_fall = false
 
-[node name="SlimeSpawnState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("slime_collision_box", "slime_ground_state")]
+[node name="SlimeSpawnState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("slime_collision_box", "slime_ground_state", "slime_death_state")]
 script = ExtResource("11_p2uk4")
 slime_collision_box = NodePath("../../SlimeCollisionBox")
 slime_ground_state = NodePath("../SlimeGroundState")
 slime_spawn_animation = "idle_short"
+slime_death_state = NodePath("../SlimeDeathState")
 can_move = false
 can_fall = false
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("10_v44u5")
 health = 10.0
+await_death_animation = true
 
 [node name="StateDebugLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("11_uuqok")]
 offset_left = -62.0
@@ -413,6 +424,16 @@ player = NodePath("..")
 wait_time = 0.5
 autostart = true
 
+[node name="HealthDebugLabel" type="Label" parent="." node_paths=PackedStringArray("player")]
+offset_left = -65.0
+offset_top = -66.0
+offset_right = -5.0
+offset_bottom = -40.0
+text = "Health: "
+script = ExtResource("15_vs56u")
+player = NodePath("..")
+
 [connection signal="facing_direction_changed" from="." to="." method="_on_facing_direction_changed"]
 [connection signal="frame_changed" from="Sprite2D" to="." method="_on_sprite_2d_frame_changed"]
+[connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/SlimeDeathState" method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

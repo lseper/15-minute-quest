@@ -7,6 +7,8 @@ class_name Player extends CharacterBody2D
 @onready var state_machine: CharacterStateMachine = $CharacterStateMachine
 @onready var health : int = $Damageable.health
 
+var jump_velocity: int = -500
+
 signal facing_direction_changed(facing_right: bool)
 
 @export var speed: int = 400
@@ -19,7 +21,6 @@ var facing : int = 1
 
 func _ready():
 	animation_tree.active = true
-	
 
 func update_animation_parameters():
 	animation_tree.set("parameters/move/blend_position", direction)
@@ -48,9 +49,6 @@ func _input(event):
 			direction = 1
 			facing = 1
 		update_facing_direction()
-
-func _on_body_entered(body):
-	print(body.name)
 
 func _physics_process(delta):
 	velocity.y += gravity

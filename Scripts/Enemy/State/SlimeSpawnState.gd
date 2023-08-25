@@ -4,6 +4,7 @@ class_name SlimeSpawnState extends State
 @export var slime_collision_box : SlimeCollisionBox
 @export var slime_ground_state: SlimeGroundState
 @export var slime_spawn_animation: String
+@export var slime_death_state: SlimeDeathState
 var spawn_ceiling: int
 
 func on_enter():
@@ -19,6 +20,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if character.health <= 0:
+		next_state = slime_death_state
 	var slime_bottom = character.position.y + int(slime_collision_box.shape.size.y / 2.0)
 	if character.position.y < spawn_ceiling:
 		next_state = slime_ground_state

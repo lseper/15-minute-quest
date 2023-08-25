@@ -533,10 +533,10 @@ tracks/3/path = NodePath("Sword/AttackCollision:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_4lno8"]
@@ -576,6 +576,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sword/AttackCollision:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sword/SpecialCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_pno4d"]
@@ -819,6 +843,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sword/AttackCollision:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_qtxn5"]
 resource_name = "special_recover"
@@ -871,6 +907,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sword/AttackCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_gruhy"]
 resource_name = "special_release"
@@ -922,6 +970,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sword/AttackCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j64ek"]
@@ -980,13 +1040,14 @@ character = NodePath("..")
 current_state = NodePath("Ground")
 animation_tree = NodePath("../AnimationTree")
 
-[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "attack_state", "special_state", "death_state")]
+[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "attack_state", "special_state", "death_state", "player")]
 script = ExtResource("9_ojjok")
 air_state = NodePath("../Air")
 attack_state = NodePath("../Attack")
 special_state = NodePath("../Special")
 death_state = NodePath("../Death")
 ground_animation = "move"
+player = NodePath("../..")
 
 [node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "attack_state")]
 script = ExtResource("10_oys7h")
@@ -1015,12 +1076,15 @@ script = ExtResource("13_5tyc4")
 death_node = "death"
 can_move = false
 
-[node name="VelocityDebugLabel" parent="." instance=ExtResource("14_7oqwt")]
+[node name="VelocityDebugLabel" parent="." node_paths=PackedStringArray("player") instance=ExtResource("14_7oqwt")]
+player = NodePath("..")
 
-[node name="StateDebugLabel" parent="." instance=ExtResource("15_jasu6")]
+[node name="StateDebugLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("15_jasu6")]
+state_machine = NodePath("../CharacterStateMachine")
 
 [node name="Sword" type="Area2D" parent="." node_paths=PackedStringArray("player", "attack_collision_box", "special_collision_box")]
-collision_mask = 5
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("16_w0tq7")
 player = NodePath("..")
 attack_collision_box = NodePath("AttackCollision")
@@ -1036,7 +1100,6 @@ facing_right_position = Vector2(20, -4)
 [node name="SpecialCollision" type="CollisionShape2D" parent="Sword"]
 position = Vector2(28, 6)
 shape = SubResource("RectangleShape2D_m0w46")
-disabled = true
 debug_color = Color(0.829096, 0.374124, 0.339421, 0.42)
 script = ExtResource("18_exnyp")
 facing_left_position = Vector2(-28, 6)
@@ -1045,8 +1108,11 @@ facing_right_position = Vector2(28, 6)
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("19_ocjkc")
 health = 200.0
+await_death_animation = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Special" method="_on_animation_tree_animation_finished"]
+[connection signal="body_entered" from="Sword" to="CharacterStateMachine/Ground" method="_on_sword_body_entered"]
+[connection signal="body_entered" from="Sword" to="CharacterStateMachine/Air" method="_on_sword_body_entered"]
 [connection signal="body_entered" from="Sword" to="Sword" method="_on_body_entered"]

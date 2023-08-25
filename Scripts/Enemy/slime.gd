@@ -58,6 +58,8 @@ func _physics_process(delta):
 		velocity.y += gravity
 	if state_machine.check_if_can_move():	
 		velocity.x = speed * direction
+	else:
+		velocity.x = 0
 	move_and_slide()
 
 

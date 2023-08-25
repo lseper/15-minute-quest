@@ -11,10 +11,7 @@ extends State
 func attack():
 	next_state = attack_state
 	attack_state.return_state = self
-
-func state_input(event):
-	if event.is_action_pressed("ui_accept"):
-		attack()
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -37,3 +34,8 @@ func state_process(delta):
 		playback.travel(jump_ascending_animation)
 	elif character.velocity.y > jump_max_epsilon:
 		playback.travel(jump_descending_animation)
+
+func _on_sword_body_entered(body):
+	# TODO: Change to abstract "MovableEntity" class
+	if body is Player and get_parent().current_state == self:
+		attack()

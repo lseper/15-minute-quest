@@ -25,6 +25,8 @@ func _ready():
 	current_state.on_enter()
 
 func switch_states(new_state: State):
+	if not get_parent() is Slime:
+		print(current_state.name)
 	if current_state != null:
 		current_state.on_exit()
 		current_state.next_state = null
