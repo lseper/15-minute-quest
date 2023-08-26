@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cf5l07apvpcjl"]
+
+[ext_resource type="PackedScene" uid="uid://c2c3t4kvfvjj8" path="res://Scenes/platform.tscn" id="1_jgm2i"]
+[ext_resource type="Texture2D" uid="uid://byd8yvghnpngt" path="res://Imported Assets/Background/Free Pixel Art Forest/Preview/Background.png" id="2_rhtqg"]
+[ext_resource type="PackedScene" uid="uid://jdtjknljlkyl" path="res://Scenes/Entities/dragon.tscn" id="3_iahtu"]
+[ext_resource type="PackedScene" uid="uid://blbs5jbyvy4o0" path="res://Scenes/Entities/player.tscn" id="4_e7bli"]
+
+[node name="necromancer_fight" type="Node2D"]
+
+[node name="ground" parent="." instance=ExtResource("1_jgm2i")]
+position = Vector2(567, 241)
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(560, 233)
+texture = ExtResource("2_rhtqg")
+
+[node name="Necromancer" parent="." node_paths=PackedStringArray("seeking") instance=ExtResource("3_iahtu")]
+position = Vector2(851, 466)
+seeking = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("4_e7bli")]
+position = Vector2(388, 522)
+
+[node name="left" parent="." instance=ExtResource("1_jgm2i")]
+position = Vector2(434, 178)
+rotation = 1.5708
+
+[node name="right" parent="." instance=ExtResource("1_jgm2i")]
+position = Vector2(695, 167)
+rotation = -1.5708

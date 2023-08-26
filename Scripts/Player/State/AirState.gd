@@ -35,7 +35,13 @@ func state_process(delta):
 	elif character.velocity.y > jump_max_epsilon:
 		playback.travel(jump_descending_animation)
 
+func collision_is_damageable(body: Node):
+	for child in body.get_children():
+		if child is Damageable:
+			return true
+	return false
+
 func _on_sword_body_entered(body):
 	# TODO: Change to abstract "MovableEntity" class
-	if body is Player and get_parent().current_state == self:
+	if body is Player and collision_is_damageable(body) and get_parent().current_state == self:
 		attack()

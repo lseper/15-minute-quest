@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://blbs5jbyvy4o0"]
+[gd_scene load_steps=116 format=3 uid="uid://blbs5jbyvy4o0"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_narcn"]
 [ext_resource type="Texture2D" uid="uid://bj30t0o2uumvc" path="res://Assets/Player/Player Sword Long Stab 96x48-Sheet.png" id="2_qtdon"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ielrwuvxmiqm" path="res://Assets/Player/Player Sword Run 48x48-Sheet.png" id="7_heifn"]
 [ext_resource type="Script" path="res://Scripts/Player/State/CharacterStateMachine.gd" id="8_xm4qh"]
 [ext_resource type="Script" path="res://Scripts/Player/State/GroundState.gd" id="9_ojjok"]
+[ext_resource type="Script" path="res://Scripts/Player/State/PlayerHitState.gd" id="9_wrj4e"]
 [ext_resource type="Script" path="res://Scripts/Player/State/AirState.gd" id="10_oys7h"]
 [ext_resource type="Script" path="res://Scripts/Player/State/AttackState.gd" id="11_jctj5"]
 [ext_resource type="Script" path="res://Scripts/Player/State/SpecialState.gd" id="12_lltjg"]
@@ -19,6 +20,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/FacingCollisionShape2D.gd" id="17_866ep"]
 [ext_resource type="Script" path="res://Scripts/Player/SpecialCollision.gd" id="18_exnyp"]
 [ext_resource type="Script" path="res://Scripts/Damageable.gd" id="19_ocjkc"]
+[ext_resource type="PackedScene" uid="uid://bofroqok6kh13" path="res://Scenes/DebugScenes/health_debug_label.tscn" id="21_iwg7t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jgm4s"]
 radius = 7.0
@@ -1008,7 +1010,7 @@ size = Vector2(36, 21)
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(608, 357)
 collision_layer = 2
-collision_mask = 61
+collision_mask = 57
 script = ExtResource("1_narcn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -1039,6 +1041,14 @@ script = ExtResource("8_xm4qh")
 character = NodePath("..")
 current_state = NodePath("Ground")
 animation_tree = NodePath("../AnimationTree")
+
+[node name="Hit" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "damageable_node", "death_state")]
+script = ExtResource("9_wrj4e")
+ground_state = NodePath("../Ground")
+damageable_node = NodePath("../../Damageable")
+death_state = NodePath("../Death")
+
+[node name="InvincibilityTimer" type="Timer" parent="CharacterStateMachine/Hit"]
 
 [node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "attack_state", "special_state", "death_state", "player")]
 script = ExtResource("9_ojjok")
@@ -1071,10 +1081,12 @@ special_recover_node = "special_recover"
 special_velocity_friction = 30
 can_move = false
 
-[node name="Death" type="Node" parent="CharacterStateMachine"]
+[node name="Death" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("player_hurtbox")]
 script = ExtResource("13_5tyc4")
 death_node = "death"
+player_hurtbox = NodePath("../../CollisionShape2D")
 can_move = false
+can_change_direction = false
 
 [node name="VelocityDebugLabel" parent="." node_paths=PackedStringArray("player") instance=ExtResource("14_7oqwt")]
 player = NodePath("..")
@@ -1083,7 +1095,7 @@ player = NodePath("..")
 state_machine = NodePath("../CharacterStateMachine")
 
 [node name="Sword" type="Area2D" parent="." node_paths=PackedStringArray("player", "attack_collision_box", "special_collision_box")]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 4
 script = ExtResource("16_w0tq7")
 player = NodePath("..")
@@ -1110,9 +1122,18 @@ script = ExtResource("19_ocjkc")
 health = 200.0
 await_death_animation = true
 
+[node name="HealthDebugLabel" parent="." node_paths=PackedStringArray("player_damageable_node") instance=ExtResource("21_iwg7t")]
+offset_left = -54.0
+offset_top = -67.0
+offset_right = 6.0
+offset_bottom = -41.0
+player_damageable_node = NodePath("../Damageable")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Special" method="_on_animation_tree_animation_finished"]
+[connection signal="interrupt_state" from="CharacterStateMachine/Hit" to="CharacterStateMachine" method="_on_hit_interrupt_state"]
+[connection signal="timeout" from="CharacterStateMachine/Hit/InvincibilityTimer" to="CharacterStateMachine/Hit" method="_on_invincibility_timer_timeout"]
 [connection signal="body_entered" from="Sword" to="CharacterStateMachine/Ground" method="_on_sword_body_entered"]
 [connection signal="body_entered" from="Sword" to="CharacterStateMachine/Air" method="_on_sword_body_entered"]
 [connection signal="body_entered" from="Sword" to="Sword" method="_on_body_entered"]

@@ -1,5 +1,7 @@
 class_name Damageable extends Node
 
+signal on_hit(node: Node, damage_taken: int)
+
 @export var health: float = 20 : 
 	get:
 		return health
@@ -10,6 +12,7 @@ class_name Damageable extends Node
 
 func hit(damage: int):
 	health -= damage
+	emit_signal("on_hit", get_parent(), damage)
 	if health <= 0:
 		# manage the queue_free in the entity itself then
 		if not await_death_animation:

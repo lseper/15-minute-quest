@@ -1,13 +1,12 @@
-extends Label
+class_name SlimeHitboxCollision extends CollisionShape2D
 
-@export var player_damageable_node: Damageable
+@export var facing_left_position := Vector2(-6, 5)
+@export var facing_right_position := Vector2(5.5, 4)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if player_damageable_node != null:
-		text = "Health: %f" % player_damageable_node.health
+	pass

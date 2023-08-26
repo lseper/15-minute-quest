@@ -6,11 +6,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgkqh"]
 size = Vector2(917, 62)
 
-[node name="SlimeSpawner" type="Area2D" node_paths=PackedStringArray("player")]
+[node name="SlimeSpawner" type="Area2D"]
 collision_mask = 63
 script = ExtResource("1_gnt2c")
 enemy = ExtResource("2_blcjo")
-player = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(537.5, 504.5)

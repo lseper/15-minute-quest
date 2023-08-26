@@ -5,14 +5,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cuw65"]
 size = Vector2(917, 60)
 
-[node name="Platform" type="Node2D"]
-
-[node name="ground" type="Sprite2D" parent="."]
+[node name="ground" type="Sprite2D"]
 position = Vector2(539, 140)
 texture = ExtResource("1_ejtpb")
 
-[node name="GroundArea" type="StaticBody2D" parent="ground"]
+[node name="GroundArea" type="StaticBody2D" parent="."]
 
-[node name="GroundAreaCollisionShape" type="CollisionShape2D" parent="ground/GroundArea"]
+[node name="GroundAreaCollisionShape" type="CollisionShape2D" parent="GroundArea"]
 position = Vector2(-2.5, 363)
 shape = SubResource("RectangleShape2D_cuw65")

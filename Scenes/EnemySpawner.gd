@@ -7,7 +7,7 @@ class_name EnemySpawner extends Area2D
 
 @onready var x_width_half = int(spawn_area.shape.size.x / 2.0)
 @onready var x_min = spawn_area.position.x - x_width_half
-@onready var x_max = x_min + spawn_area.position.x + x_width_half
+@onready var x_max = spawn_area.position.x + x_width_half
 
 @onready var y = spawn_area.position.y + int(spawn_area.shape.size.y / 2.0)
 @onready var spawn_ceiling = int(spawn_area.position.y - int(spawn_area.shape.size.y / 2.0))
@@ -15,7 +15,6 @@ class_name EnemySpawner extends Area2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

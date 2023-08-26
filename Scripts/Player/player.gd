@@ -5,7 +5,7 @@ class_name Player extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine: CharacterStateMachine = $CharacterStateMachine
-@onready var health : int = $Damageable.health
+@onready var damageable_node : Damageable = $Damageable
 
 var jump_velocity: int = -500
 
@@ -18,15 +18,15 @@ var direction = 0
 var facing : int = 1
 #var stab_velocity = 500
 #var stab_velocity_decay = 10
-
+	
 func _ready():
 	animation_tree.active = true
 
-func update_animation_parameters():
-	animation_tree.set("parameters/move/blend_position", direction)
+func update_animation_parameters(animation_tree_parameter_path: String):
+	animation_tree.set(animation_tree_parameter_path, direction)
 
 func update_facing_direction():
-	if health > 0 and state_machine.check_if_can_change_direction():
+	if $Damageable.health > 0 and state_machine.check_if_can_change_direction():
 		if direction > 0:
 			sprite.flip_h = false
 		elif direction < 0:
@@ -34,7 +34,7 @@ func update_facing_direction():
 		emit_signal("facing_direction_changed", not sprite.flip_h)
 
 func _process(delta):
-	update_animation_parameters()
+	update_animation_parameters("parameters/move/blend_position")
 
 func _input(event):
 	if state_machine.check_if_can_change_direction():

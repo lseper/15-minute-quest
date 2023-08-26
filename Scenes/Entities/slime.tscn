@@ -1,20 +1,22 @@
-[gd_scene load_steps=35 format=3 uid="uid://c5mvsgp01m7ly"]
+[gd_scene load_steps=38 format=3 uid="uid://c5mvsgp01m7ly"]
 
+[ext_resource type="Script" path="res://Scripts/Enemy/Slime/slime.gd" id="1_48mfi"]
 [ext_resource type="Texture2D" uid="uid://f6ljbeaghnea" path="res://Imported Assets/Enemies/Slimes/slime_idle1.png" id="1_oo1fs"]
-[ext_resource type="Script" path="res://Scripts/Enemy/slime.gd" id="1_vajoh"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Slime/SlimeCollisionBox.gd" id="2_yt7m3"]
 [ext_resource type="Texture2D" uid="uid://c2fm4ywwyd5id" path="res://Imported Assets/Enemies/Slimes/slime_idle2.png" id="3_k4q6r"]
 [ext_resource type="Texture2D" uid="uid://xmxqjacyog67" path="res://Imported Assets/Enemies/Slimes/slime_idle3.png" id="4_2byoi"]
 [ext_resource type="Texture2D" uid="uid://cbdkkj7v35l1d" path="res://Imported Assets/Enemies/Slimes/slime_move.png" id="5_ogvii"]
 [ext_resource type="Texture2D" uid="uid://okg5ltppltyg" path="res://Imported Assets/Enemies/Slimes/slime_die.png" id="6_vsd7r"]
-[ext_resource type="Script" path="res://Scripts/Enemy/SlimeCollisionBox.gd" id="7_o7bff"]
-[ext_resource type="Script" path="res://Scripts/Enemy/State/SlimeStateMachine.gd" id="8_37uxy"]
-[ext_resource type="Script" path="res://Scripts/Enemy/State/SlimeGroundState.gd" id="8_57ldn"]
-[ext_resource type="Script" path="res://Scripts/Enemy/State/SlimeDeathState.gd" id="9_wmssj"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Slime/State/SlimeStateMachine.gd" id="8_p4uh4"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Slime/State/SlimeGroundState.gd" id="9_nbvwf"]
 [ext_resource type="Script" path="res://Scripts/Damageable.gd" id="10_v44u5"]
-[ext_resource type="Script" path="res://Scripts/Enemy/State/SlimeSpawnState.gd" id="11_p2uk4"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Slime/State/SlimeDeathState.gd" id="10_y8uhy"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Slime/State/SlimeSpawnState.gd" id="11_l2rl7"]
 [ext_resource type="PackedScene" uid="uid://4japi0h1i07l" path="res://Scenes/UI/state_debug_label.tscn" id="11_uuqok"]
 [ext_resource type="PackedScene" uid="uid://cld6xwqay6nub" path="res://Scenes/UI/velocity_debug_label.tscn" id="12_ius7r"]
-[ext_resource type="Script" path="res://Scripts/DebugScripts/HealthDebugLabel.gd" id="15_vs56u"]
+[ext_resource type="PackedScene" uid="uid://bofroqok6kh13" path="res://Scenes/DebugScenes/health_debug_label.tscn" id="15_61rd2"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Slime/SlimeHurtbox.gd" id="16_cfr32"]
+[ext_resource type="Script" path="res://Scripts/Enemy/Slime/SlimeHurtboxCollision.gd" id="16_vp302"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbhfj"]
 size = Vector2(19.5, 14)
@@ -92,6 +94,18 @@ tracks/3/path = NodePath("../SlimeCollisionBox:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../SlimeHitbox/SlimeHitboxCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0, 1.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -340,16 +354,21 @@ states/move/position = Vector2(537.885, 101.633)
 transitions = ["death", "End", SubResource("AnimationNodeStateMachineTransition_s77ur"), "move", "death", SubResource("AnimationNodeStateMachineTransition_tykg1"), "Start", "idle_short", SubResource("AnimationNodeStateMachineTransition_xn7cj"), "idle_short", "move", SubResource("AnimationNodeStateMachineTransition_rr0ww")]
 graph_offset = Vector2(92.3853, -6.43496)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxaxf"]
+size = Vector2(19, 14)
+
 [node name="Slime" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 2
-script = ExtResource("1_vajoh")
-speed = 50
+collision_mask = 0
+script = ExtResource("1_48mfi")
+seek_bias = 1.15
+speed = 100
 
 [node name="SlimeCollisionBox" type="CollisionShape2D" parent="."]
 position = Vector2(5, 4)
 shape = SubResource("RectangleShape2D_nbhfj")
-script = ExtResource("7_o7bff")
+disabled = true
+script = ExtResource("2_yt7m3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
@@ -358,10 +377,10 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("5_ogvii")
+texture = ExtResource("6_vsd7r")
 offset = Vector2(2.08165e-12, 2.08165e-12)
 flip_h = true
-hframes = 7
+hframes = 13
 vframes = 7
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -370,34 +389,34 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/move/blend_position = -0.00243545
 
 [node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state", "animation_tree")]
-script = ExtResource("8_37uxy")
+script = ExtResource("8_p4uh4")
 character = NodePath("..")
 current_state = NodePath("SlimeSpawnState")
 animation_tree = NodePath("../AnimationTree")
 
 [node name="SlimeGroundState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("slime_death_state", "damageable_node")]
-script = ExtResource("8_57ldn")
+script = ExtResource("9_nbvwf")
 slime_death_state = NodePath("../SlimeDeathState")
 movement_animation = "move"
 ground_node = "move"
 damageable_node = NodePath("../../Damageable")
 
-[node name="SlimeDeathState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("root_slime_node", "slime_collision_box")]
-script = ExtResource("9_wmssj")
+[node name="SlimeDeathState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("slime_collision_box")]
+script = ExtResource("10_y8uhy")
 slime_death_node = "death"
 slime_death_animation = "death"
-root_slime_node = NodePath("../..")
 slime_collision_box = NodePath("../../SlimeCollisionBox")
 can_move = false
 can_change_direction = false
 can_fall = false
 
-[node name="SlimeSpawnState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("slime_collision_box", "slime_ground_state", "slime_death_state")]
-script = ExtResource("11_p2uk4")
+[node name="SlimeSpawnState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("slime_collision_box", "slime_ground_state", "slime_death_state", "damageable_node")]
+script = ExtResource("11_l2rl7")
 slime_collision_box = NodePath("../../SlimeCollisionBox")
 slime_ground_state = NodePath("../SlimeGroundState")
 slime_spawn_animation = "idle_short"
 slime_death_state = NodePath("../SlimeDeathState")
+damageable_node = NodePath("../../Damageable")
 can_move = false
 can_fall = false
 
@@ -413,27 +432,36 @@ offset_right = -13.0
 offset_bottom = -6.0
 state_machine = NodePath("../CharacterStateMachine")
 
-[node name="VelocityDebugLabel" parent="." node_paths=PackedStringArray("player") instance=ExtResource("12_ius7r")]
+[node name="VelocityDebugLabel" parent="." instance=ExtResource("12_ius7r")]
 offset_left = -64.0
 offset_top = -49.0
 offset_right = 6.0
 offset_bottom = -23.0
-player = NodePath("..")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
 
-[node name="HealthDebugLabel" type="Label" parent="." node_paths=PackedStringArray("player")]
-offset_left = -65.0
-offset_top = -66.0
-offset_right = -5.0
-offset_bottom = -40.0
-text = "Health: "
-script = ExtResource("15_vs56u")
-player = NodePath("..")
+[node name="HealthDebugLabel" parent="." node_paths=PackedStringArray("player_damageable_node") instance=ExtResource("15_61rd2")]
+player_damageable_node = NodePath("../Damageable")
+
+[node name="SlimeHitbox" type="Area2D" parent="." node_paths=PackedStringArray("slime", "slime_hitbox_collision")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("16_cfr32")
+slime = NodePath("..")
+slime_hitbox_collision = NodePath("SlimeHitboxCollision")
+
+[node name="SlimeHitboxCollision" type="CollisionShape2D" parent="SlimeHitbox"]
+position = Vector2(5, 4)
+shape = SubResource("RectangleShape2D_bxaxf")
+debug_color = Color(0.87451, 0.329412, 0.294118, 0.419608)
+script = ExtResource("16_vp302")
+facing_left_position = Vector2(5, 4)
+facing_right_position = Vector2(-7, 4)
 
 [connection signal="facing_direction_changed" from="." to="." method="_on_facing_direction_changed"]
 [connection signal="frame_changed" from="Sprite2D" to="." method="_on_sprite_2d_frame_changed"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/SlimeDeathState" method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="SlimeHitbox" to="SlimeHitbox" method="_on_body_entered"]

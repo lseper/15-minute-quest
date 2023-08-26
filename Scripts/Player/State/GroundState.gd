@@ -38,9 +38,14 @@ func _ready():
 func state_process(delta):
 	if not character.is_on_floor():
 		next_state = air_state
+		
+func collision_is_damageable(body: Node):
+	for child in body.get_children():
+		if child is Damageable:
+			return true
+	return false
 
 func _on_sword_body_entered(body):
 	# TODO: change once abstract "MoveableEntity" created
-	if body is Player and get_parent().current_state == self:
-		print("from ground")
+	if body is Player and collision_is_damageable(body) and get_parent().current_state == self:
 		attack()

@@ -11,6 +11,9 @@ func check_if_can_move() -> bool:
 
 func check_if_can_change_direction() -> bool:
 	return current_state.can_change_direction
+	
+func on_state_interrupt_state(new_state: State):
+	switch_states(new_state)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,13 +23,13 @@ func _ready():
 			# TODO: Set states up with what they need to function
 			child.character = character
 			child.playback = animation_tree["parameters/playback"]
+			# connect to interrupt signal
+			child.connect("interrupt_state", on_state_interrupt_state)
 		else:
 			push_warning("Child" + child.name + " is not a State for CharacterStateMachine")
 	current_state.on_enter()
 
 func switch_states(new_state: State):
-	if not get_parent() is Slime:
-		print(current_state.name)
 	if current_state != null:
 		current_state.on_exit()
 		current_state.next_state = null
@@ -44,3 +47,7 @@ func _process(delta):
 	
 func _input(event):
 	current_state.state_input(event)
+
+
+func _on_hit_interrupt_state(new_state):
+	on_state_interrupt_state(new_state)
