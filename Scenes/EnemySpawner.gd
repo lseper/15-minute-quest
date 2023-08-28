@@ -4,6 +4,7 @@ class_name EnemySpawner extends Area2D
 @onready var spawn_area = $CollisionShape2D
 @export var enemy : PackedScene
 @export var player: Player
+@export var item_manager : ItemManager
 
 @onready var x_width_half = int(spawn_area.shape.size.x / 2.0)
 @onready var x_min = spawn_area.position.x - x_width_half
@@ -20,9 +21,10 @@ func _ready():
 func _process(delta):
 	pass
 
-func _on_timer_timeout():
+func spawn_slime():
 	# creates an instance of the scene
 	var slime_instance : Slime = enemy.instantiate()
+	slime_instance.item_manager = item_manager
 	if player != null:
 		slime_instance.seeking = player
 	slime_instance.color = randi_range(0, 6)
@@ -30,3 +32,6 @@ func _on_timer_timeout():
 	slime_instance.position = Vector2(randx, y)
 	slime_instance.spawn_ceiling = spawn_ceiling
 	self.add_child(slime_instance)
+
+func _on_timer_timeout():
+	spawn_slime()

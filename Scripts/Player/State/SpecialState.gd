@@ -33,15 +33,16 @@ func on_exit():
 	charge_power = 0
 	
 func unleash():
-	character.velocity.x = (float(clamp(charge_power, 0, max_charge_time)) / float(max_charge_time)) * character.facing * special_velocity
 	is_released = true
+	is_charged = false
 	self.can_change_direction = false
+	character.velocity.x = (float(clamp(charge_power, 0, max_charge_time)) / float(max_charge_time)) * character.facing * special_velocity
 	charge_power = 0
 	playback.travel(special_release_node)
 
 func state_input(event):
 	if event.is_action_released("ui_down"):
-		if is_charged:
+		if is_charged and not is_released:
 			unleash()
 
 func apply_friction():

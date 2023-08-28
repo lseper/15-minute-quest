@@ -1,197 +1,198 @@
-[gd_scene load_steps=116 format=3 uid="uid://blbs5jbyvy4o0"]
+[gd_scene load_steps=117 format=3 uid="uid://blbs5jbyvy4o0"]
 
-[ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_narcn"]
-[ext_resource type="Texture2D" uid="uid://bj30t0o2uumvc" path="res://Assets/Player/Player Sword Long Stab 96x48-Sheet.png" id="2_qtdon"]
-[ext_resource type="Texture2D" uid="uid://ds4gi0fpwyd1t" path="res://Assets/Player/player sword atk 64x64t.png" id="3_26h8i"]
-[ext_resource type="Texture2D" uid="uid://bvplukcod8rka" path="res://Assets/Player/Player Death 64x64-Sheet.png" id="4_y7ecy"]
-[ext_resource type="Texture2D" uid="uid://b2bwqivtmxyud" path="res://Assets/Player/Player Sword Idle 48x48-Sheet.png" id="5_8x6ef"]
-[ext_resource type="Texture2D" uid="uid://3bo8staf8sig" path="res://Assets/Player/player jump 48x48-Sheet.png" id="6_01x7c"]
-[ext_resource type="Texture2D" uid="uid://ielrwuvxmiqm" path="res://Assets/Player/Player Sword Run 48x48-Sheet.png" id="7_heifn"]
-[ext_resource type="Script" path="res://Scripts/Player/State/CharacterStateMachine.gd" id="8_xm4qh"]
-[ext_resource type="Script" path="res://Scripts/Player/State/GroundState.gd" id="9_ojjok"]
-[ext_resource type="Script" path="res://Scripts/Player/State/PlayerHitState.gd" id="9_wrj4e"]
-[ext_resource type="Script" path="res://Scripts/Player/State/AirState.gd" id="10_oys7h"]
-[ext_resource type="Script" path="res://Scripts/Player/State/AttackState.gd" id="11_jctj5"]
-[ext_resource type="Script" path="res://Scripts/Player/State/SpecialState.gd" id="12_lltjg"]
-[ext_resource type="Script" path="res://Scripts/Player/State/DeathState.gd" id="13_5tyc4"]
-[ext_resource type="PackedScene" uid="uid://cld6xwqay6nub" path="res://Scenes/UI/velocity_debug_label.tscn" id="14_7oqwt"]
-[ext_resource type="PackedScene" uid="uid://4japi0h1i07l" path="res://Scenes/UI/state_debug_label.tscn" id="15_jasu6"]
-[ext_resource type="Script" path="res://Scripts/Player/Sword.gd" id="16_w0tq7"]
-[ext_resource type="Script" path="res://Scripts/Player/FacingCollisionShape2D.gd" id="17_866ep"]
-[ext_resource type="Script" path="res://Scripts/Player/SpecialCollision.gd" id="18_exnyp"]
-[ext_resource type="Script" path="res://Scripts/Damageable.gd" id="19_ocjkc"]
-[ext_resource type="PackedScene" uid="uid://bofroqok6kh13" path="res://Scenes/DebugScenes/health_debug_label.tscn" id="21_iwg7t"]
+[ext_resource type="Script" path="res://Scripts/Player/MainPlayer.gd" id="1_5pe8a"]
+[ext_resource type="Texture2D" uid="uid://ielrwuvxmiqm" path="res://Assets/Player/Player Sword Run 48x48-Sheet.png" id="2_8yrs5"]
+[ext_resource type="Texture2D" uid="uid://ds4gi0fpwyd1t" path="res://Assets/Player/player sword atk 64x64t.png" id="3_6njsj"]
+[ext_resource type="Texture2D" uid="uid://bvplukcod8rka" path="res://Assets/Player/Player Death 64x64-Sheet.png" id="4_w1pfd"]
+[ext_resource type="Texture2D" uid="uid://b2bwqivtmxyud" path="res://Assets/Player/Player Sword Idle 48x48-Sheet.png" id="5_g5phj"]
+[ext_resource type="Texture2D" uid="uid://3bo8staf8sig" path="res://Assets/Player/player jump 48x48-Sheet.png" id="6_al7ii"]
+[ext_resource type="Texture2D" uid="uid://bj30t0o2uumvc" path="res://Assets/Player/Player Sword Long Stab 96x48-Sheet.png" id="7_2juej"]
+[ext_resource type="Script" path="res://Scripts/Player/State/CharacterStateMachine.gd" id="8_fwn0n"]
+[ext_resource type="Script" path="res://Scripts/Player/State/PlayerHitState.gd" id="9_oepnm"]
+[ext_resource type="Script" path="res://Scripts/Player/State/GroundState.gd" id="10_axvrq"]
+[ext_resource type="Script" path="res://Scripts/Player/State/AirState.gd" id="11_2sv6o"]
+[ext_resource type="Script" path="res://Scripts/Player/State/AttackState.gd" id="12_sn8y3"]
+[ext_resource type="Script" path="res://Scripts/Player/State/SpecialState.gd" id="13_imp3m"]
+[ext_resource type="Script" path="res://Scripts/Player/State/DeathState.gd" id="14_ujb2l"]
+[ext_resource type="PackedScene" uid="uid://cld6xwqay6nub" path="res://Scenes/UI/velocity_debug_label.tscn" id="15_r6dtu"]
+[ext_resource type="PackedScene" uid="uid://4japi0h1i07l" path="res://Scenes/UI/state_debug_label.tscn" id="16_116pp"]
+[ext_resource type="Script" path="res://Scripts/Player/Sword.gd" id="17_acau6"]
+[ext_resource type="Script" path="res://Scripts/Player/FacingCollisionShape2D.gd" id="18_sy13y"]
+[ext_resource type="Script" path="res://Scripts/Player/SpecialCollision.gd" id="19_nky2n"]
+[ext_resource type="Script" path="res://Scripts/Damageable.gd" id="20_bw3vi"]
+[ext_resource type="PackedScene" uid="uid://bofroqok6kh13" path="res://Scenes/DebugScenes/health_debug_label.tscn" id="21_wlx0p"]
+[ext_resource type="PackedScene" uid="uid://dqqybgtg1psqo" path="res://Scenes/DebugScenes/position_debug_label.tscn" id="22_7i0qh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jgm4s"]
 radius = 7.0
 height = 26.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y8dgn"]
-atlas = ExtResource("3_26h8i")
+atlas = ExtResource("3_6njsj")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y08hv"]
-atlas = ExtResource("3_26h8i")
+atlas = ExtResource("3_6njsj")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gj4bu"]
-atlas = ExtResource("3_26h8i")
+atlas = ExtResource("3_6njsj")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3nwk0"]
-atlas = ExtResource("3_26h8i")
+atlas = ExtResource("3_6njsj")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ow23"]
-atlas = ExtResource("4_y7ecy")
+atlas = ExtResource("4_w1pfd")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d06oh"]
-atlas = ExtResource("4_y7ecy")
+atlas = ExtResource("4_w1pfd")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pwanw"]
-atlas = ExtResource("4_y7ecy")
+atlas = ExtResource("4_w1pfd")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bbs0b"]
-atlas = ExtResource("4_y7ecy")
+atlas = ExtResource("4_w1pfd")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t3nox"]
-atlas = ExtResource("4_y7ecy")
+atlas = ExtResource("4_w1pfd")
 region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bxpxs"]
-atlas = ExtResource("4_y7ecy")
+atlas = ExtResource("4_w1pfd")
 region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2lyvy"]
-atlas = ExtResource("4_y7ecy")
+atlas = ExtResource("4_w1pfd")
 region = Rect2(384, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cu1vr"]
-atlas = ExtResource("4_y7ecy")
+atlas = ExtResource("4_w1pfd")
 region = Rect2(448, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2w6ma"]
-atlas = ExtResource("4_y7ecy")
+atlas = ExtResource("4_w1pfd")
 region = Rect2(512, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_baiuw"]
-atlas = ExtResource("4_y7ecy")
+atlas = ExtResource("4_w1pfd")
 region = Rect2(576, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_81mmf"]
-atlas = ExtResource("5_8x6ef")
+atlas = ExtResource("5_g5phj")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hv7og"]
-atlas = ExtResource("5_8x6ef")
+atlas = ExtResource("5_g5phj")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vj6dt"]
-atlas = ExtResource("5_8x6ef")
+atlas = ExtResource("5_g5phj")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ffw8"]
-atlas = ExtResource("5_8x6ef")
+atlas = ExtResource("5_g5phj")
 region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4wbcc"]
-atlas = ExtResource("5_8x6ef")
+atlas = ExtResource("5_g5phj")
 region = Rect2(192, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yexn5"]
-atlas = ExtResource("5_8x6ef")
+atlas = ExtResource("5_g5phj")
 region = Rect2(240, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m154q"]
-atlas = ExtResource("5_8x6ef")
+atlas = ExtResource("5_g5phj")
 region = Rect2(288, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j4jy5"]
-atlas = ExtResource("5_8x6ef")
+atlas = ExtResource("5_g5phj")
 region = Rect2(336, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rc80k"]
-atlas = ExtResource("5_8x6ef")
+atlas = ExtResource("5_g5phj")
 region = Rect2(384, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_745pn"]
-atlas = ExtResource("5_8x6ef")
+atlas = ExtResource("5_g5phj")
 region = Rect2(432, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n6abe"]
-atlas = ExtResource("6_01x7c")
+atlas = ExtResource("6_al7ii")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oxh0q"]
-atlas = ExtResource("6_01x7c")
+atlas = ExtResource("6_al7ii")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xwfps"]
-atlas = ExtResource("6_01x7c")
+atlas = ExtResource("6_al7ii")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ko75e"]
-atlas = ExtResource("7_heifn")
+atlas = ExtResource("2_8yrs5")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3uaqs"]
-atlas = ExtResource("7_heifn")
+atlas = ExtResource("2_8yrs5")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mgklp"]
-atlas = ExtResource("7_heifn")
+atlas = ExtResource("2_8yrs5")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6xo37"]
-atlas = ExtResource("7_heifn")
+atlas = ExtResource("2_8yrs5")
 region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mrwft"]
-atlas = ExtResource("7_heifn")
+atlas = ExtResource("2_8yrs5")
 region = Rect2(192, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gw5bm"]
-atlas = ExtResource("7_heifn")
+atlas = ExtResource("2_8yrs5")
 region = Rect2(240, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fivcf"]
-atlas = ExtResource("7_heifn")
+atlas = ExtResource("2_8yrs5")
 region = Rect2(288, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2rrvq"]
-atlas = ExtResource("7_heifn")
+atlas = ExtResource("2_8yrs5")
 region = Rect2(336, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t3k7h"]
-atlas = ExtResource("2_qtdon")
+atlas = ExtResource("7_2juej")
 region = Rect2(0, 0, 96, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_85xl1"]
-atlas = ExtResource("2_qtdon")
+atlas = ExtResource("7_2juej")
 region = Rect2(96, 0, 96, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_spdm2"]
-atlas = ExtResource("2_qtdon")
+atlas = ExtResource("7_2juej")
 region = Rect2(192, 0, 96, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rq150"]
-atlas = ExtResource("2_qtdon")
+atlas = ExtResource("7_2juej")
 region = Rect2(288, 0, 96, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uagqv"]
-atlas = ExtResource("2_qtdon")
+atlas = ExtResource("7_2juej")
 region = Rect2(384, 0, 96, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3rkva"]
-atlas = ExtResource("2_qtdon")
+atlas = ExtResource("7_2juej")
 region = Rect2(480, 0, 96, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d52vp"]
-atlas = ExtResource("2_qtdon")
+atlas = ExtResource("7_2juej")
 region = Rect2(576, 0, 96, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_onrgu"]
@@ -502,7 +503,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_26h8i")]
+"values": [ExtResource("3_6njsj")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -553,7 +554,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_y7ecy")]
+"values": [ExtResource("4_w1pfd")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -617,7 +618,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_8x6ef")]
+"values": [ExtResource("5_g5phj")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -658,7 +659,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_01x7c")]
+"values": [ExtResource("6_al7ii")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -698,7 +699,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_01x7c")]
+"values": [ExtResource("6_al7ii")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -738,7 +739,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_01x7c")]
+"values": [ExtResource("6_al7ii")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -779,7 +780,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_heifn")]
+"values": [ExtResource("2_8yrs5")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -819,7 +820,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_qtdon")]
+"values": [ExtResource("7_2juej")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -871,7 +872,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_qtdon")]
+"values": [ExtResource("7_2juej")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -916,10 +917,10 @@ tracks/4/path = NodePath("Sword/AttackCollision:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_gruhy"]
@@ -935,7 +936,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_qtdon")]
+"values": [ExtResource("7_2juej")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -968,10 +969,10 @@ tracks/3/path = NodePath("Sword/SpecialCollision:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [false, true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -980,10 +981,22 @@ tracks/4/path = NodePath("Sword/AttackCollision:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Damageable:vulnerable")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j64ek"]
@@ -1009,13 +1022,14 @@ size = Vector2(36, 21)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(608, 357)
+scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 57
-script = ExtResource("1_narcn")
+script = ExtResource("1_5pe8a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("7_heifn")
-hframes = 8
+texture = ExtResource("5_g5phj")
+hframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_jgm4s")
@@ -1037,13 +1051,13 @@ libraries = {
 }
 
 [node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state", "animation_tree")]
-script = ExtResource("8_xm4qh")
+script = ExtResource("8_fwn0n")
 character = NodePath("..")
 current_state = NodePath("Ground")
 animation_tree = NodePath("../AnimationTree")
 
 [node name="Hit" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "damageable_node", "death_state")]
-script = ExtResource("9_wrj4e")
+script = ExtResource("9_oepnm")
 ground_state = NodePath("../Ground")
 damageable_node = NodePath("../../Damageable")
 death_state = NodePath("../Death")
@@ -1051,7 +1065,7 @@ death_state = NodePath("../Death")
 [node name="InvincibilityTimer" type="Timer" parent="CharacterStateMachine/Hit"]
 
 [node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "attack_state", "special_state", "death_state", "player")]
-script = ExtResource("9_ojjok")
+script = ExtResource("10_axvrq")
 air_state = NodePath("../Air")
 attack_state = NodePath("../Attack")
 special_state = NodePath("../Special")
@@ -1060,7 +1074,7 @@ ground_animation = "move"
 player = NodePath("../..")
 
 [node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "attack_state")]
-script = ExtResource("10_oys7h")
+script = ExtResource("11_2sv6o")
 ground_state = NodePath("../Ground")
 jump_ascending_animation = "jump_ascend"
 jump_max_animation = "jump_max"
@@ -1069,11 +1083,11 @@ attack_state = NodePath("../Attack")
 jump_max_epsilon = 100
 
 [node name="Attack" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("11_jctj5")
+script = ExtResource("12_sn8y3")
 attack_node = "attack"
 
 [node name="Special" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state")]
-script = ExtResource("12_lltjg")
+script = ExtResource("13_imp3m")
 idle_state = NodePath("../Ground")
 special_charge_node = "special_charge"
 special_release_node = "special_release"
@@ -1082,22 +1096,22 @@ special_velocity_friction = 30
 can_move = false
 
 [node name="Death" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("player_hurtbox")]
-script = ExtResource("13_5tyc4")
+script = ExtResource("14_ujb2l")
 death_node = "death"
 player_hurtbox = NodePath("../../CollisionShape2D")
 can_move = false
 can_change_direction = false
 
-[node name="VelocityDebugLabel" parent="." node_paths=PackedStringArray("player") instance=ExtResource("14_7oqwt")]
+[node name="VelocityDebugLabel" parent="." node_paths=PackedStringArray("player") instance=ExtResource("15_r6dtu")]
 player = NodePath("..")
 
-[node name="StateDebugLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("15_jasu6")]
+[node name="StateDebugLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("16_116pp")]
 state_machine = NodePath("../CharacterStateMachine")
 
 [node name="Sword" type="Area2D" parent="." node_paths=PackedStringArray("player", "attack_collision_box", "special_collision_box")]
 collision_layer = 0
 collision_mask = 4
-script = ExtResource("16_w0tq7")
+script = ExtResource("17_acau6")
 player = NodePath("..")
 attack_collision_box = NodePath("AttackCollision")
 special_collision_box = NodePath("SpecialCollision")
@@ -1105,29 +1119,38 @@ special_collision_box = NodePath("SpecialCollision")
 [node name="AttackCollision" type="CollisionShape2D" parent="Sword"]
 position = Vector2(20, -4)
 shape = SubResource("RectangleShape2D_1necl")
-script = ExtResource("17_866ep")
+disabled = true
+script = ExtResource("18_sy13y")
 facing_left_position = Vector2(-20, -4)
 facing_right_position = Vector2(20, -4)
 
 [node name="SpecialCollision" type="CollisionShape2D" parent="Sword"]
 position = Vector2(28, 6)
 shape = SubResource("RectangleShape2D_m0w46")
+disabled = true
 debug_color = Color(0.829096, 0.374124, 0.339421, 0.42)
-script = ExtResource("18_exnyp")
+script = ExtResource("19_nky2n")
 facing_left_position = Vector2(-28, 6)
 facing_right_position = Vector2(28, 6)
 
 [node name="Damageable" type="Node" parent="."]
-script = ExtResource("19_ocjkc")
-health = 200.0
+script = ExtResource("20_bw3vi")
+vulnerable = false
+health = 100.0
 await_death_animation = true
 
-[node name="HealthDebugLabel" parent="." node_paths=PackedStringArray("player_damageable_node") instance=ExtResource("21_iwg7t")]
+[node name="HealthDebugLabel" parent="." node_paths=PackedStringArray("player_damageable_node") instance=ExtResource("21_wlx0p")]
 offset_left = -54.0
 offset_top = -67.0
 offset_right = 6.0
 offset_bottom = -41.0
 player_damageable_node = NodePath("../Damageable")
+
+[node name="PositionDebugLabel" parent="." instance=ExtResource("22_7i0qh")]
+offset_left = -76.0
+offset_top = -34.0
+offset_right = -4.0
+offset_bottom = -8.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]

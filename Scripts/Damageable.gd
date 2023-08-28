@@ -2,11 +2,14 @@ class_name Damageable extends Node
 
 signal on_hit(node: Node, damage_taken: int)
 
+@export var vulnerable := true
+
 @export var health: float = 20 : 
 	get:
 		return health
 	set(new_health):
 		SignalBus.emit_signal("on_health_changed", get_parent(), new_health - health)
+		# ensure floors and ceiling on health
 		health = new_health
 @export var await_death_animation: bool = false
 

@@ -1,7 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://c5mvsgp01m7ly"]
+[gd_scene load_steps=41 format=3 uid="uid://c5mvsgp01m7ly"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/Slime/slime.gd" id="1_48mfi"]
 [ext_resource type="Texture2D" uid="uid://f6ljbeaghnea" path="res://Imported Assets/Enemies/Slimes/slime_idle1.png" id="1_oo1fs"]
+[ext_resource type="PackedScene" uid="uid://c35pew7pe4t4s" path="res://Scenes/Entities/Pickup/copper_coin.tscn" id="2_eiyw8"]
+[ext_resource type="PackedScene" uid="uid://dwvxlsliiqe2d" path="res://Scenes/Entities/Pickup/gold_coin.tscn" id="2_ofa8u"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Slime/SlimeCollisionBox.gd" id="2_yt7m3"]
 [ext_resource type="Texture2D" uid="uid://c2fm4ywwyd5id" path="res://Imported Assets/Enemies/Slimes/slime_idle2.png" id="3_k4q6r"]
 [ext_resource type="Texture2D" uid="uid://xmxqjacyog67" path="res://Imported Assets/Enemies/Slimes/slime_idle3.png" id="4_2byoi"]
@@ -17,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bofroqok6kh13" path="res://Scenes/DebugScenes/health_debug_label.tscn" id="15_61rd2"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Slime/SlimeHurtbox.gd" id="16_cfr32"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Slime/SlimeHurtboxCollision.gd" id="16_vp302"]
+[ext_resource type="PackedScene" uid="uid://dqqybgtg1psqo" path="res://Scenes/DebugScenes/position_debug_label.tscn" id="20_cy1j8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbhfj"]
 size = Vector2(19.5, 14)
@@ -358,6 +361,7 @@ graph_offset = Vector2(92.3853, -6.43496)
 size = Vector2(19, 14)
 
 [node name="Slime" type="CharacterBody2D"]
+scale = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_48mfi")
@@ -406,6 +410,8 @@ script = ExtResource("10_y8uhy")
 slime_death_node = "death"
 slime_death_animation = "death"
 slime_collision_box = NodePath("../../SlimeCollisionBox")
+common_pickup = ExtResource("2_eiyw8")
+rare_pickup = ExtResource("2_ofa8u")
 can_move = false
 can_change_direction = false
 can_fall = false
@@ -426,6 +432,7 @@ health = 10.0
 await_death_animation = true
 
 [node name="StateDebugLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("11_uuqok")]
+visible = false
 offset_left = -62.0
 offset_top = -32.0
 offset_right = -13.0
@@ -433,6 +440,7 @@ offset_bottom = -6.0
 state_machine = NodePath("../CharacterStateMachine")
 
 [node name="VelocityDebugLabel" parent="." instance=ExtResource("12_ius7r")]
+visible = false
 offset_left = -64.0
 offset_top = -49.0
 offset_right = 6.0
@@ -443,12 +451,14 @@ wait_time = 0.5
 autostart = true
 
 [node name="HealthDebugLabel" parent="." node_paths=PackedStringArray("player_damageable_node") instance=ExtResource("15_61rd2")]
+visible = false
 player_damageable_node = NodePath("../Damageable")
 
 [node name="SlimeHitbox" type="Area2D" parent="." node_paths=PackedStringArray("slime", "slime_hitbox_collision")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("16_cfr32")
+damage = 25
 slime = NodePath("..")
 slime_hitbox_collision = NodePath("SlimeHitboxCollision")
 
@@ -459,6 +469,8 @@ debug_color = Color(0.87451, 0.329412, 0.294118, 0.419608)
 script = ExtResource("16_vp302")
 facing_left_position = Vector2(5, 4)
 facing_right_position = Vector2(-7, 4)
+
+[node name="PositionDebugLabel" parent="." instance=ExtResource("20_cy1j8")]
 
 [connection signal="facing_direction_changed" from="." to="." method="_on_facing_direction_changed"]
 [connection signal="frame_changed" from="Sprite2D" to="." method="_on_sprite_2d_frame_changed"]

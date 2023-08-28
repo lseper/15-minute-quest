@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2c3t4kvfvjj8"]
+
+[ext_resource type="Texture2D" uid="uid://cjx4lkqqvjsgx" path="res://Imported Assets/Background/Free Pixel Art Forest/PNG/Background layers/Layer_0001_8.png" id="1_ejtpb"]
+[ext_resource type="Script" path="res://Scripts/World/platform.gd" id="2_vufhl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cuw65"]
+size = Vector2(917, 60)
+
+[node name="GroundArea" type="StaticBody2D"]
+collision_mask = 63
+script = ExtResource("2_vufhl")
+
+[node name="ground" type="Sprite2D" parent="."]
+position = Vector2(-2, -362)
+texture = ExtResource("1_ejtpb")
+
+[node name="GroundAreaCollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cuw65")

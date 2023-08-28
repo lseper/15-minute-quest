@@ -20,12 +20,19 @@ func special():
 	
 func death():
 	next_state = death_state
+	
+# TODO: move ot NPC shop heal
+func heal():
+	player.damageable_node.hit(-5)
 
 func state_input(event: InputEvent):
 	if event.is_action_pressed("ui_up"):
 		jump()
 	if event.is_action_pressed("ui_down"):
 		special()
+	# TODO: NPC Shop heal
+	if event.is_action_pressed("ui_accept"):
+		heal()
 
 func on_enter():
 	playback.travel(ground_animation)

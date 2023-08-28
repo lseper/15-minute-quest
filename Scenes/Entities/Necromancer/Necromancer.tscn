@@ -633,7 +633,8 @@ state_machine = NodePath("../CharacterStateMachine")
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("9_lkbbl")
-health = 100.0
+health = 200.0
+max_health = 200.0
 await_death_animation = true
 
 [node name="HealthDebugLabel" parent="." node_paths=PackedStringArray("player_damageable_node") instance=ExtResource("10_gh1d4")]

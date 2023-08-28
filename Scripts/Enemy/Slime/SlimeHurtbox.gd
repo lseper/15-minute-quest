@@ -9,7 +9,7 @@ func _ready():
 
 func _on_body_entered(body):
 	for child in body.get_children():
-		if child is Damageable:
+		if child is Damageable and child.vulnerable:
 			child.hit(damage)
 
 func on_player_facing_direction_changed(facing_right: bool):

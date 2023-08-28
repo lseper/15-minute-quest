@@ -8,6 +8,7 @@ class_name Slime extends Player
 @export var seek_bias : float = 1.75
 @export var color: SlimeColor = SlimeColor.GREY
 @export var spawn_ceiling: int
+@export var item_manager : ItemManager
 
 @onready var collision_box : SlimeCollisionBox = $SlimeCollisionBox
 
@@ -31,7 +32,7 @@ func change_direction(new_direction: int):
 func move():
 	if seeking != null:
 # if in front, this will be positive, if behind, negative
-		var position_relative_to_seeker = seeking.position.x - position.x
+		var position_relative_to_seeker = seeking.global_position.x - global_position.x
 		var bias_direction = int(position_relative_to_seeker / abs(position_relative_to_seeker))
 # TODO: for now, this is constant bias regardless of how FAR the slime is from
 # the hero. Change it so that when it's closer, the bias is lessened
@@ -46,7 +47,7 @@ func move():
 
 func _ready():
 	animation_tree.active = true
-	
+	pickup_dropped.connect(item_manager.drop_pickup)
 
 # override player inputs
 func _input(event):

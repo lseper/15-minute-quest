@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqqybgtg1psqo"]
+
+[ext_resource type="Script" path="res://Scripts/DebugScripts/PositionDebugLabel.gd" id="1_838m7"]
+
+[node name="PositionDebugLabel" type="Label"]
+offset_left = -73.0
+offset_top = -26.0
+offset_right = -1.0
+text = "Position: "
+script = ExtResource("1_838m7")

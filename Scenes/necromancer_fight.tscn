@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cf5l07apvpcjl"]
 
-[ext_resource type="PackedScene" uid="uid://c2c3t4kvfvjj8" path="res://Scenes/platform.tscn" id="1_jgm2i"]
+[ext_resource type="PackedScene" uid="uid://c2c3t4kvfvjj8" path="res://Scenes/World/platform.tscn" id="1_jgm2i"]
 [ext_resource type="Texture2D" uid="uid://byd8yvghnpngt" path="res://Imported Assets/Background/Free Pixel Art Forest/Preview/Background.png" id="2_rhtqg"]
-[ext_resource type="PackedScene" uid="uid://jdtjknljlkyl" path="res://Scenes/Entities/dragon.tscn" id="3_iahtu"]
-[ext_resource type="PackedScene" uid="uid://blbs5jbyvy4o0" path="res://Scenes/Entities/player.tscn" id="4_e7bli"]
+[ext_resource type="PackedScene" uid="uid://jdtjknljlkyl" path="res://Scenes/Entities/Necromancer/Necromancer.tscn" id="3_iahtu"]
+[ext_resource type="PackedScene" uid="uid://blbs5jbyvy4o0" path="res://Scenes/Entities/Player/player.tscn" id="4_e7bli"]
 
 [node name="necromancer_fight" type="Node2D"]
 

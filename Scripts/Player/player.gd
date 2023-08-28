@@ -5,11 +5,13 @@ class_name Player extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine: CharacterStateMachine = $CharacterStateMachine
-@onready var damageable_node : Damageable = $Damageable
+var damageable_node : Damageable
 
 var jump_velocity: int = -500
 
 signal facing_direction_changed(facing_right: bool)
+
+signal pickup_dropped(body: Node, pickup: PackedScene)
 
 @export var speed: int = 400
 # used for movement
@@ -21,6 +23,7 @@ var facing : int = 1
 	
 func _ready():
 	animation_tree.active = true
+	damageable_node = $Damageable
 
 func update_animation_parameters(animation_tree_parameter_path: String):
 	animation_tree.set(animation_tree_parameter_path, direction)
@@ -51,7 +54,11 @@ func _input(event):
 		update_facing_direction()
 
 func _physics_process(delta):
-	velocity.y += gravity
+	if not is_on_floor():
+		velocity.y += gravity
 	if state_machine.check_if_can_move():	
 		velocity.x = speed * direction
 	move_and_slide()
+	
+func drop_pickup(drop: PackedScene):
+	pickup_dropped.emit(self, drop)
