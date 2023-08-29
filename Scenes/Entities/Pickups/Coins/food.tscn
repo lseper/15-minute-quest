@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://h4cip4bwdbnw"]
+
+[ext_resource type="PackedScene" uid="uid://dw5aljuct41el" path="res://Scenes/Entities/Pickups/pickup.tscn" id="1_mx6pl"]
+
+[node name="PickupArea" instance=ExtResource("1_mx6pl")]

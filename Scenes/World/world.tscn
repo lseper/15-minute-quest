@@ -6,10 +6,6 @@
 [node name="World" type="Node2D"]
 position = Vector2(23, -200)
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(547.502, 434.001)
-texture = ExtResource("3_ve8f8")
-
 [node name="Platform" parent="." instance=ExtResource("14_7mihy")]
 position = Vector2(552, 796)
 
@@ -20,3 +16,7 @@ rotation = 1.5708
 [node name="right" parent="." instance=ExtResource("14_7mihy")]
 position = Vector2(1040, 367)
 rotation = -1.5708
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(547.502, 434.001)
+texture = ExtResource("3_ve8f8")

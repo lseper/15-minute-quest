@@ -13,7 +13,8 @@ func _physics_process(delta):
 	
 func _on_body_entered(body: Node):
 	super(body)
-	if body is Platform:
+	# ensure the coin is falling when it hits the ground
+	if body is Platform and velocity.y >= 0:
 		velocity.y *= -1
 #	mimic loss of kinetic energy to sound
 		velocity.y *= 0.65

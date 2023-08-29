@@ -473,7 +473,7 @@ states/special_recover/position = Vector2(564, 178.504)
 states/special_release/node = SubResource("AnimationNodeAnimation_5hopr")
 states/special_release/position = Vector2(382, 178.504)
 transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_6ggrk"), "move", "jump_ascend", SubResource("AnimationNodeStateMachineTransition_ga887"), "jump_ascend", "jump_max", SubResource("AnimationNodeStateMachineTransition_erwdl"), "jump_max", "jump_descend", SubResource("AnimationNodeStateMachineTransition_qwijt"), "jump_descend", "move", SubResource("AnimationNodeStateMachineTransition_w6ie7"), "move", "attack", SubResource("AnimationNodeStateMachineTransition_ck4i2"), "attack", "move", SubResource("AnimationNodeStateMachineTransition_gfkjr"), "special_charge", "special_release", SubResource("AnimationNodeStateMachineTransition_e7txt"), "special_release", "special_recover", SubResource("AnimationNodeStateMachineTransition_sabg2"), "move", "special_charge", SubResource("AnimationNodeStateMachineTransition_46l4l"), "special_recover", "move", SubResource("AnimationNodeStateMachineTransition_djvyg"), "death", "End", SubResource("AnimationNodeStateMachineTransition_327mo"), "jump_ascend", "death", SubResource("AnimationNodeStateMachineTransition_jc2hv"), "jump_max", "death", SubResource("AnimationNodeStateMachineTransition_uks45"), "jump_descend", "death", SubResource("AnimationNodeStateMachineTransition_4x8qg"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_7w5js"), "special_charge", "death", SubResource("AnimationNodeStateMachineTransition_df1mh"), "special_release", "death", SubResource("AnimationNodeStateMachineTransition_vnrf1"), "special_recover", "death", SubResource("AnimationNodeStateMachineTransition_k0vcu"), "move", "death", SubResource("AnimationNodeStateMachineTransition_47rst"), "jump_ascend", "attack", SubResource("AnimationNodeStateMachineTransition_i63dh"), "jump_max", "attack", SubResource("AnimationNodeStateMachineTransition_xwn6y"), "jump_descend", "attack", SubResource("AnimationNodeStateMachineTransition_47n1c")]
-graph_offset = Vector2(-15.3975, -9.94119)
+graph_offset = Vector2(225.127, -13.1587)
 
 [sub_resource type="Animation" id="Animation_aa4lj"]
 length = 0.5
@@ -1026,6 +1026,7 @@ scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 57
 script = ExtResource("1_5pe8a")
+speed = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("5_g5phj")
@@ -1119,7 +1120,6 @@ special_collision_box = NodePath("SpecialCollision")
 [node name="AttackCollision" type="CollisionShape2D" parent="Sword"]
 position = Vector2(20, -4)
 shape = SubResource("RectangleShape2D_1necl")
-disabled = true
 script = ExtResource("18_sy13y")
 facing_left_position = Vector2(-20, -4)
 facing_right_position = Vector2(20, -4)
@@ -1135,7 +1135,6 @@ facing_right_position = Vector2(28, 6)
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("20_bw3vi")
-vulnerable = false
 health = 100.0
 await_death_animation = true
 

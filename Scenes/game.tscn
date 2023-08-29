@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://74yhfcjfjj3u"]
+[gd_scene load_steps=8 format=3 uid="uid://74yhfcjfjj3u"]
 
 [ext_resource type="PackedScene" uid="uid://5h3jsfgmmdng" path="res://Scenes/World/world.tscn" id="1_jlsda"]
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_kxqkl"]
 [ext_resource type="PackedScene" uid="uid://blbs5jbyvy4o0" path="res://Scenes/Entities/Player/player.tscn" id="2_7lb5d"]
 [ext_resource type="PackedScene" uid="uid://b6vw65653q1m1" path="res://Scenes/slime_spawner.tscn" id="3_s06tg"]
 [ext_resource type="PackedScene" uid="uid://cwbrbowvi40bb" path="res://Scenes/UI/ui.tscn" id="5_bwqe8"]
-[ext_resource type="PackedScene" uid="uid://c35pew7pe4t4s" path="res://Scenes/Entities/Pickup/copper_coin.tscn" id="6_4y8wm"]
 [ext_resource type="PackedScene" uid="uid://cg5oebsjapbdm" path="res://Scenes/World/item_manager.tscn" id="6_50s3c"]
 [ext_resource type="Script" path="res://Scenes/World/item_manager.gd" id="7_mfrkh"]
 
@@ -22,9 +21,6 @@ position = Vector2(-2, -183)
 
 [node name="ItemManager" parent="." instance=ExtResource("6_50s3c")]
 script = ExtResource("7_mfrkh")
-
-[node name="PickupArea" parent="." instance=ExtResource("6_4y8wm")]
-position = Vector2(369, 569)
 
 [node name="SlimeSpawner" parent="." node_paths=PackedStringArray("player", "item_manager") instance=ExtResource("3_s06tg")]
 position = Vector2(545, 611)
