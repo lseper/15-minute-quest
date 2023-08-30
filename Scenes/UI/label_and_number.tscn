@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqn1tkwqwpqit"]
+[gd_scene load_steps=4 format=3 uid="uid://dqn1tkwqwpqit"]
 
 [ext_resource type="PackedScene" uid="uid://be0eiqykrmuhm" path="res://Scenes/UI/bar.tscn" id="1_7m4dn"]
+[ext_resource type="Script" path="res://Scripts/UI/label_and_number.gd" id="2_v8agm"]
 [ext_resource type="Theme" uid="uid://bbpeuexxw4qjt" path="res://Theme/default_theme.tres" id="2_vy53o"]
 
 [node name="NinePatchRect" instance=ExtResource("1_7m4dn")]
 offset_right = 145.0
 offset_bottom = 57.0
+script = ExtResource("2_v8agm")
 
 [node name="Container" type="Control" parent="." index="0"]
 layout_mode = 1
@@ -46,4 +48,4 @@ offset_bottom = 14.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("2_vy53o")
-text = "2001"
+text = "0"

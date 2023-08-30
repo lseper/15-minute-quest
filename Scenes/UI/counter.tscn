@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://rhha2mond5q4"]
+[gd_scene load_steps=7 format=3 uid="uid://rhha2mond5q4"]
 
 [ext_resource type="Texture2D" uid="uid://bu4ewcya7mtu8" path="res://Imported Assets/UI/GUI.png" id="1_rwq57"]
 [ext_resource type="Texture2D" uid="uid://crmurqeibqmtr" path="res://Imported Assets/Pickups/Coins/coin3_16x16.png" id="2_wa1vo"]
+[ext_resource type="Script" path="res://Scripts/UI/counter.gd" id="2_yjbqv"]
 [ext_resource type="Theme" uid="uid://bbpeuexxw4qjt" path="res://Theme/default_theme.tres" id="3_2iyjr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sd6nf"]
@@ -19,6 +20,7 @@ texture = SubResource("AtlasTexture_sd6nf")
 patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
+script = ExtResource("2_yjbqv")
 
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 1
@@ -45,6 +47,6 @@ offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("3_2iyjr")
-text = "10"
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1

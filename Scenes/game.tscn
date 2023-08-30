@@ -34,12 +34,12 @@ position = Vector2(-383, -546)
 script = ExtResource("7_mfrkh")
 
 [node name="SlimeSpawner" parent="." node_paths=PackedStringArray("player", "item_manager") instance=ExtResource("3_s06tg")]
-position = Vector2(589, 525)
+position = Vector2(589, 332)
 player = NodePath("../Player")
 item_manager = NodePath("../ItemManager")
 
 [node name="Player" parent="." instance=ExtResource("2_7lb5d")]
-position = Vector2(519, 465)
+position = Vector2(652, 237)
 
 [node name="WorldBoundaries" type="Node2D" parent="."]
 
@@ -63,6 +63,7 @@ rotation = 1.5708
 shape = SubResource("RectangleShape2D_24ikj")
 
 [node name="Floor" type="StaticBody2D" parent="WorldBoundaries"]
+position = Vector2(0, -193)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/Floor"]
 position = Vector2(588.5, 659.5)
