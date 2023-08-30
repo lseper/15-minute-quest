@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://74yhfcjfjj3u"]
+[gd_scene load_steps=11 format=3 uid="uid://74yhfcjfjj3u"]
 
 [ext_resource type="PackedScene" uid="uid://5h3jsfgmmdng" path="res://Scenes/World/world.tscn" id="1_jlsda"]
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_kxqkl"]
@@ -8,24 +8,62 @@
 [ext_resource type="PackedScene" uid="uid://cg5oebsjapbdm" path="res://Scenes/World/item_manager.tscn" id="6_50s3c"]
 [ext_resource type="Script" path="res://Scenes/World/item_manager.gd" id="7_mfrkh"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gw0s"]
+size = Vector2(185, 1279)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24ikj"]
+size = Vector2(218, 1916)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yyd73"]
+size = Vector2(1919, 327)
+
 [node name="Game" type="Node2D" node_paths=PackedStringArray("player", "ui", "item_manager")]
+position = Vector2(371, 459)
 script = ExtResource("1_kxqkl")
 player = NodePath("Player")
 ui = NodePath("UI")
 item_manager = NodePath("ItemManager")
 
-[node name="Node2D" parent="." instance=ExtResource("1_jlsda")]
-position = Vector2(-2, -183)
+[node name="Background" parent="." instance=ExtResource("1_jlsda")]
+position = Vector2(834, -38)
 
 [node name="UI" parent="." instance=ExtResource("5_bwqe8")]
 
 [node name="ItemManager" parent="." instance=ExtResource("6_50s3c")]
+position = Vector2(-383, -546)
 script = ExtResource("7_mfrkh")
 
 [node name="SlimeSpawner" parent="." node_paths=PackedStringArray("player", "item_manager") instance=ExtResource("3_s06tg")]
-position = Vector2(545, 611)
+position = Vector2(589, 525)
 player = NodePath("../Player")
 item_manager = NodePath("../ItemManager")
 
 [node name="Player" parent="." instance=ExtResource("2_7lb5d")]
-position = Vector2(529, 550)
+position = Vector2(519, 465)
+
+[node name="WorldBoundaries" type="Node2D" parent="."]
+
+[node name="LeftBoundary" type="StaticBody2D" parent="WorldBoundaries"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/LeftBoundary"]
+position = Vector2(-463.5, 180)
+shape = SubResource("RectangleShape2D_8gw0s")
+
+[node name="RightBoundary" type="StaticBody2D" parent="WorldBoundaries"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/RightBoundary"]
+position = Vector2(1642, 182.5)
+shape = SubResource("RectangleShape2D_8gw0s")
+
+[node name="TopBoundary" type="StaticBody2D" parent="WorldBoundaries"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/TopBoundary"]
+position = Vector2(590, -347)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_24ikj")
+
+[node name="Floor" type="StaticBody2D" parent="WorldBoundaries"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/Floor"]
+position = Vector2(588.5, 659.5)
+shape = SubResource("RectangleShape2D_yyd73")

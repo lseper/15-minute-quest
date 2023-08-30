@@ -12,9 +12,11 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	
 func _on_body_entered(body: Node):
+	print("coin hitting platform")
 	super(body)
 	# ensure the coin is falling when it hits the ground
-	if body is Platform and velocity.y >= 0:
+	if body is StaticBody2D and velocity.y >= 0:
+		print("\tcoin slowing down")
 		velocity.y *= -1
 #	mimic loss of kinetic energy to sound
 		velocity.y *= 0.65

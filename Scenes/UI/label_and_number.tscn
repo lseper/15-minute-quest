@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqn1tkwqwpqit"]
+
+[ext_resource type="PackedScene" uid="uid://be0eiqykrmuhm" path="res://Scenes/UI/bar.tscn" id="1_7m4dn"]
+[ext_resource type="Theme" uid="uid://bbpeuexxw4qjt" path="res://Theme/default_theme.tres" id="2_vy53o"]
+
+[node name="NinePatchRect" instance=ExtResource("1_7m4dn")]
+offset_right = 145.0
+offset_bottom = 57.0
+
+[node name="Container" type="Control" parent="." index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 18.0
+offset_right = -13.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_vy53o")
+
+[node name="Text" type="Label" parent="Container" index="0"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -14.0
+offset_right = 51.0
+offset_bottom = 14.0
+grow_vertical = 2
+theme = ExtResource("2_vy53o")
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Score:"
+
+[node name="Number" type="Label" parent="Container" index="1"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("2_vy53o")
+text = "2001"

@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://rhha2mond5q4"]
+
+[ext_resource type="Texture2D" uid="uid://bu4ewcya7mtu8" path="res://Imported Assets/UI/GUI.png" id="1_rwq57"]
+[ext_resource type="Texture2D" uid="uid://crmurqeibqmtr" path="res://Imported Assets/Pickups/Coins/coin3_16x16.png" id="2_wa1vo"]
+[ext_resource type="Theme" uid="uid://bbpeuexxw4qjt" path="res://Theme/default_theme.tres" id="3_2iyjr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sd6nf"]
+atlas = ExtResource("1_rwq57")
+region = Rect2(129, 48, 31, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pdwk"]
+atlas = ExtResource("2_wa1vo")
+region = Rect2(19, 2, 11, 12)
+
+[node name="Counter" type="NinePatchRect"]
+offset_right = 97.0
+offset_bottom = 46.0
+texture = SubResource("AtlasTexture_sd6nf")
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_3pdwk")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -20.0
+offset_right = 15.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("3_2iyjr")
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://d16oobvd03ke5"]
+
+[ext_resource type="PackedScene" uid="uid://rhha2mond5q4" path="res://Scenes/UI/counter.tscn" id="1_54b5y"]
+
+[node name="Counter" instance=ExtResource("1_54b5y")]
+offset_right = 121.0
+offset_bottom = 54.0
+
+[node name="Label" parent="." index="1"]
+offset_top = -22.0
+offset_right = 0.0
+offset_bottom = 27.0
+text = "0"

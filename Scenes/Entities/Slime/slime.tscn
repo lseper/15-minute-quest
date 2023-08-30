@@ -11,10 +11,10 @@
 [ext_resource type="Script" path="res://Scripts/Enemy/Slime/State/SlimeGroundState.gd" id="9_nbvwf"]
 [ext_resource type="Script" path="res://Scripts/Damageable.gd" id="10_v44u5"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Slime/State/SlimeDeathState.gd" id="10_y8uhy"]
-[ext_resource type="PackedScene" uid="uid://c35pew7pe4t4s" path="res://Scenes/Entities/Pickups/Coins/copper_coin_large.tscn" id="11_2hqee"]
 [ext_resource type="PackedScene" uid="uid://dg5mmquew0ui0" path="res://Scenes/Entities/Pickups/Coins/copper_coin.tscn" id="11_arn2g"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Slime/State/SlimeSpawnState.gd" id="11_l2rl7"]
 [ext_resource type="PackedScene" uid="uid://4japi0h1i07l" path="res://Scenes/UI/state_debug_label.tscn" id="11_uuqok"]
+[ext_resource type="PackedScene" uid="uid://dwvxlsliiqe2d" path="res://Scenes/Entities/Pickups/Coins/gold_coin.tscn" id="12_8mrd8"]
 [ext_resource type="PackedScene" uid="uid://cld6xwqay6nub" path="res://Scenes/UI/velocity_debug_label.tscn" id="12_ius7r"]
 [ext_resource type="PackedScene" uid="uid://bofroqok6kh13" path="res://Scenes/DebugScenes/health_debug_label.tscn" id="15_61rd2"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Slime/SlimeHurtbox.gd" id="16_cfr32"]
@@ -410,8 +410,10 @@ script = ExtResource("10_y8uhy")
 slime_death_node = "death"
 slime_death_animation = "death"
 slime_collision_box = NodePath("../../SlimeCollisionBox")
+rare_drop_chance = 0.5
+drop_chance = 1.0
 common_pickup = ExtResource("11_arn2g")
-rare_pickup = ExtResource("11_2hqee")
+rare_pickup = ExtResource("12_8mrd8")
 can_move = false
 can_change_direction = false
 can_fall = false

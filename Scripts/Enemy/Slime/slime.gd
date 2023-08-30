@@ -3,9 +3,9 @@ class_name Slime extends Player
 
 @export var seeking : CharacterBody2D
 # how strongly the slime seeks the player.
-# 0.0 - 1.0 = avoids player
-# 1.0 - 2.0 = seeks player
-@export var seek_bias : float = 1.75
+# 0.0 - 1.0 = seeks player
+# -1.0 - 0.0 = avoids player
+@export var seek_bias : float = 0.5
 @export var color: SlimeColor = SlimeColor.GREY
 @export var spawn_ceiling: int
 @export var item_manager : ItemManager

@@ -1,6 +1,6 @@
 class_name Pickup extends Area2D
 
-@export var score_value: int = 100
+@export var score_value: int = 0
 
 @onready var pickup_delay_timer := $SpawnTimer
 @onready var despawn_timer := $DespawnTimer

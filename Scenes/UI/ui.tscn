@@ -1,21 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwbrbowvi40bb"]
+[gd_scene load_steps=7 format=3 uid="uid://cwbrbowvi40bb"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ui.gd" id="1_mwhm2"]
-[ext_resource type="FontFile" uid="uid://dweflrak54r34" path="res://Imported Assets/DungeonFont.ttf" id="2_tnw3y"]
-[ext_resource type="Texture2D" uid="uid://c2qftt2u1d0xb" path="res://Imported Assets/UI/Pixel UI pack 3/All-export-400.png" id="3_5wss5"]
+[ext_resource type="PackedScene" uid="uid://be0eiqykrmuhm" path="res://Scenes/UI/bar.tscn" id="2_fgqje"]
+[ext_resource type="PackedScene" uid="uid://dqn1tkwqwpqit" path="res://Scenes/UI/label_and_number.tscn" id="3_uhnni"]
+[ext_resource type="PackedScene" uid="uid://rhha2mond5q4" path="res://Scenes/UI/counter.tscn" id="4_gjxvb"]
+[ext_resource type="PackedScene" uid="uid://b7blpwuu7wxav" path="res://Scenes/UI/health_bar.tscn" id="5_qe85a"]
+[ext_resource type="PackedScene" uid="uid://cykfe031fctbv" path="res://Scenes/UI/combo_bar.tscn" id="6_ckgcu"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r83xp"]
-atlas = ExtResource("3_5wss5")
-region = Rect2(2304, 140, 192, 44)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sgx83"]
-atlas = ExtResource("3_5wss5")
-region = Rect2(2508, 24, 168, 20)
-
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("score_label", "health_bar")]
+[node name="UI" type="CanvasLayer"]
 script = ExtResource("1_mwhm2")
-score_label = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer/Score")
-health_bar = NodePath("Control/MarginContainer/VBoxContainer/HBoxContainer2/HealthBar")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -25,39 +18,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+[node name="NinePatchRect" parent="Control" instance=ExtResource("2_fgqje")]
 layout_mode = 2
-size_flags_vertical = 0
+offset_right = 1919.0
+offset_bottom = 95.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
+[node name="Bar" parent="Control" instance=ExtResource("2_fgqje")]
+offset_top = 809.0
+offset_right = 1920.0
+offset_bottom = 1283.0
 
-[node name="Score" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_tnw3y")
-text = "Score: "
+[node name="NinePatchRect" parent="." instance=ExtResource("3_uhnni")]
+offset_top = 752.0
+offset_bottom = 809.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
-layout_mode = 2
+[node name="Counter" parent="." instance=ExtResource("4_gjxvb")]
+offset_left = 1786.0
+offset_top = 95.0
+offset_right = 1919.0
+offset_bottom = 156.0
 
-[node name="HealthBar" type="TextureProgressBar" parent="Control/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-step = 5.0
-value = 100.0
-texture_under = SubResource("AtlasTexture_r83xp")
-texture_progress = SubResource("AtlasTexture_sgx83")
-texture_progress_offset = Vector2(12, 12)
+[node name="ProgressBarContainer" parent="." instance=ExtResource("5_qe85a")]
+position = Vector2(25, 676)
+scale = Vector2(4, 4)
+
+[node name="Node2D" parent="." instance=ExtResource("6_ckgcu")]
+position = Vector2(145, 780)
+scale = Vector2(4, 4)

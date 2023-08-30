@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c5mvsgp01m7ly" path="res://Scenes/Entities/Slime/slime.tscn" id="2_blcjo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgkqh"]
-size = Vector2(917, 62)
+size = Vector2(1920, 61)
 
 [node name="SlimeSpawner" type="Area2D"]
 collision_mask = 63
