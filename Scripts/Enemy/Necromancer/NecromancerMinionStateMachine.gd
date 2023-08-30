@@ -1,1 +1,1 @@
-class_name NecromancerStateMachine extends CharacterStateMachine
+class_name NecromancerMinionStateMachine extends CharacterStateMachine

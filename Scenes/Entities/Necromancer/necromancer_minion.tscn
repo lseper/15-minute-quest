@@ -212,6 +212,10 @@ seek_animation = "seek"
 death_state = NodePath("../NecromancerMinionDeathState")
 can_fall = false
 
+[node name="SeekDelay" type="Timer" parent="CharacterStateMachine/NecromancerMinionSeekState"]
+one_shot = true
+autostart = true
+
 [node name="NecromancerMinionDeathState" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("6_qibr2")
 death_animation = "death"
@@ -255,5 +259,6 @@ script = ExtResource("8_pxs72")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="CharacterStateMachine/NecromancerMinionDeathState" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/NecromancerMinionDeathState" method="_on_animation_tree_animation_finished"]
+[connection signal="timeout" from="CharacterStateMachine/NecromancerMinionSeekState/SeekDelay" to="CharacterStateMachine/NecromancerMinionSeekState" method="_on_seek_delay_timeout"]
 [connection signal="timeout" from="DespawnTimer" to="CharacterStateMachine/NecromancerMinionSeekState" method="_on_despawn_timer_timeout"]
 [connection signal="body_entered" from="NecromancerMinionHitbox" to="NecromancerMinionHitbox" method="_on_body_entered"]

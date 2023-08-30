@@ -11,14 +11,6 @@ enum SPELL {
 	MAJOR
 }
 
-var chosen_spell = spawn_minion
-
-func spawn_minion():
-	var minion = character.necromancer_minion.instantiate()
-	minion.seeking = character.seeking
-	minion.position = character.position
-	self.add_child(minion)
-
 func minor_spell():
 	playback.travel(minor_spell_animation)
 	
@@ -38,7 +30,7 @@ func on_enter():
 		major_spell()
 		
 func on_exit():
-	spawn_minion()
+	pass
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

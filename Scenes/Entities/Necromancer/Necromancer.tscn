@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://jdtjknljlkyl"]
+[gd_scene load_steps=46 format=3 uid="uid://jdtjknljlkyl"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/Necromancer/Necromancer.gd" id="1_0o0sf"]
 [ext_resource type="Texture2D" uid="uid://bpg5pfom4x8ck" path="res://Imported Assets/Enemies/Necromancer_creativekind-Sheet.png" id="1_y6d11"]
@@ -11,6 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://4japi0h1i07l" path="res://Scenes/UI/state_debug_label.tscn" id="8_k4c50"]
 [ext_resource type="Script" path="res://Scripts/Damageable.gd" id="9_lkbbl"]
 [ext_resource type="PackedScene" uid="uid://bofroqok6kh13" path="res://Scenes/DebugScenes/health_debug_label.tscn" id="10_gh1d4"]
+[ext_resource type="Script" path="res://Scenes/Entities/Necromancer/NecromancerMinionSpawnState/NecromancerMinionSpawnStateMachine.gd" id="12_efna7"]
+[ext_resource type="Script" path="res://Scenes/Entities/Necromancer/NecromancerMinionSpawnState/SpawningMinionsState.gd" id="13_pn67p"]
+[ext_resource type="Script" path="res://Scenes/Entities/Necromancer/NecromancerMinionSpawnState/RechargeState.gd" id="14_tsbdf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3tsk4"]
 size = Vector2(107, 136)
@@ -551,6 +554,7 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(261.757, 36.9875)
 
 [node name="Necromancer" type="CharacterBody2D"]
+position = Vector2(380, 339)
 collision_layer = 4
 script = ExtResource("1_0o0sf")
 necromancer_minion = ExtResource("2_7vrej")
@@ -629,12 +633,12 @@ offset_left = -81.0
 offset_top = -127.0
 offset_right = -32.0
 offset_bottom = -101.0
-state_machine = NodePath("../CharacterStateMachine")
+state_machine = NodePath("../NecromancerMinionSpawnStateMachine")
+metadata/_edit_use_anchors_ = true
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("9_lkbbl")
 health = 200.0
-max_health = 200.0
 await_death_animation = true
 
 [node name="HealthDebugLabel" parent="." node_paths=PackedStringArray("player_damageable_node") instance=ExtResource("10_gh1d4")]
@@ -643,8 +647,32 @@ offset_top = -108.0
 offset_right = -32.0
 offset_bottom = -82.0
 player_damageable_node = NodePath("../Damageable")
+metadata/_edit_use_anchors_ = true
+
+[node name="NecromancerMinionSpawnStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state", "animation_tree")]
+script = ExtResource("12_efna7")
+character = NodePath("..")
+current_state = NodePath("SpawningMinionsState")
+animation_tree = NodePath("../AnimationTree")
+
+[node name="SpawningMinionsState" type="Node" parent="NecromancerMinionSpawnStateMachine" node_paths=PackedStringArray("necromancer_collision_box", "recharge_state")]
+script = ExtResource("13_pn67p")
+necromancer_collision_box = NodePath("../../CollisionShape2D")
+recharge_state = NodePath("../RechargeState")
+
+[node name="SpawnInterval" type="Timer" parent="NecromancerMinionSpawnStateMachine/SpawningMinionsState"]
+wait_time = 0.75
+
+[node name="RechargeState" type="Node" parent="NecromancerMinionSpawnStateMachine" node_paths=PackedStringArray("spawn_state")]
+script = ExtResource("14_tsbdf")
+spawn_state = NodePath("../SpawningMinionsState")
+
+[node name="RechargeInterval" type="Timer" parent="NecromancerMinionSpawnStateMachine/RechargeState"]
+wait_time = 4.0
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/NecromancerAttackState" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/NecromancerDeathState" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/NecromancerHurtState" method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="CharacterStateMachine/NecromancerIdleState/AttackDelayTimer" to="CharacterStateMachine/NecromancerIdleState" method="_on_vulnerable_timer_timeout"]
+[connection signal="timeout" from="NecromancerMinionSpawnStateMachine/SpawningMinionsState/SpawnInterval" to="NecromancerMinionSpawnStateMachine/SpawningMinionsState" method="_on_spawn_interval_timeout"]
+[connection signal="timeout" from="NecromancerMinionSpawnStateMachine/RechargeState/RechargeInterval" to="NecromancerMinionSpawnStateMachine/RechargeState" method="_on_recharge_interval_timeout"]
