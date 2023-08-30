@@ -24,6 +24,7 @@ offset_right = 1919.0
 offset_bottom = 95.0
 
 [node name="Bar" parent="Control" instance=ExtResource("2_fgqje")]
+layout_mode = 0
 offset_top = 809.0
 offset_right = 1920.0
 offset_bottom = 1283.0
