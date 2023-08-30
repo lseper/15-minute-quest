@@ -1,9 +1,10 @@
-[gd_scene load_steps=46 format=3 uid="uid://jdtjknljlkyl"]
+[gd_scene load_steps=47 format=3 uid="uid://jdtjknljlkyl"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/Necromancer/Necromancer.gd" id="1_0o0sf"]
 [ext_resource type="Texture2D" uid="uid://bpg5pfom4x8ck" path="res://Imported Assets/Enemies/Necromancer_creativekind-Sheet.png" id="1_y6d11"]
 [ext_resource type="PackedScene" uid="uid://b0odo6b6genc4" path="res://Scenes/Entities/Necromancer/necromancer_minion.tscn" id="2_7vrej"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Necromancer/State/NecromancerStateMachine.gd" id="2_myrnh"]
+[ext_resource type="PackedScene" uid="uid://cup85djd0pfg8" path="res://Scenes/VFX/dark_spell.tscn" id="3_3bxhp"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Necromancer/State/NecromancerIdleState.gd" id="3_rmrdp"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Necromancer/State/NecromancerAttackState.gd" id="5_r3ybu"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Necromancer/State/NecromancerDeathState.gd" id="6_g4uxd"]
@@ -554,10 +555,10 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(261.757, 36.9875)
 
 [node name="Necromancer" type="CharacterBody2D"]
-position = Vector2(380, 339)
 collision_layer = 4
 script = ExtResource("1_0o0sf")
 necromancer_minion = ExtResource("2_7vrej")
+dark_spell = ExtResource("3_3bxhp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 0)
@@ -609,8 +610,8 @@ can_move = false
 can_change_direction = false
 can_fall = false
 
-[node name="MinorSpellTimer" type="Timer" parent="CharacterStateMachine/NecromancerAttackState"]
-wait_time = 0.06
+[node name="SpellTimer" type="Timer" parent="CharacterStateMachine/NecromancerAttackState"]
+wait_time = 0.5
 
 [node name="NecromancerDeathState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("necromancer_collision")]
 script = ExtResource("6_g4uxd")
@@ -633,7 +634,7 @@ offset_left = -81.0
 offset_top = -127.0
 offset_right = -32.0
 offset_bottom = -101.0
-state_machine = NodePath("../NecromancerMinionSpawnStateMachine")
+state_machine = NodePath("../CharacterStateMachine")
 metadata/_edit_use_anchors_ = true
 
 [node name="Damageable" type="Node" parent="."]
@@ -674,5 +675,6 @@ wait_time = 4.0
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/NecromancerDeathState" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/NecromancerHurtState" method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="CharacterStateMachine/NecromancerIdleState/AttackDelayTimer" to="CharacterStateMachine/NecromancerIdleState" method="_on_vulnerable_timer_timeout"]
+[connection signal="timeout" from="CharacterStateMachine/NecromancerAttackState/SpellTimer" to="CharacterStateMachine/NecromancerAttackState" method="_on_minor_spell_timer_timeout"]
 [connection signal="timeout" from="NecromancerMinionSpawnStateMachine/SpawningMinionsState/SpawnInterval" to="NecromancerMinionSpawnStateMachine/SpawningMinionsState" method="_on_spawn_interval_timeout"]
 [connection signal="timeout" from="NecromancerMinionSpawnStateMachine/RechargeState/RechargeInterval" to="NecromancerMinionSpawnStateMachine/RechargeState" method="_on_recharge_interval_timeout"]

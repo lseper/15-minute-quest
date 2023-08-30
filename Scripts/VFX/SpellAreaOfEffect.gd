@@ -1,9 +1,11 @@
-class_name ItemManager extends Node2D
+class_name SpellAreaOfEffect extends Area2D
 
-func drop_pickup(body: Node2D, pickup: PackedScene):
-	var pickup_instance = pickup.instantiate()
-	pickup_instance.position = body.global_position
-	self.add_child(pickup_instance)
+@export var damage: int = 10
+
+func _on_body_entered(body):
+	for child in body.get_children():
+		if child is Damageable:
+			child.hit(damage)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

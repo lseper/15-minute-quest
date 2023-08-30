@@ -12,7 +12,6 @@ func _on_body_entered(body):
 	for child in body.get_children():
 		if child is Damageable:
 			child.hit(damage)
-	pass # Replace with function body.
 
 func on_player_facing_direction_changed(facing_right: bool):
 	if facing_right:
