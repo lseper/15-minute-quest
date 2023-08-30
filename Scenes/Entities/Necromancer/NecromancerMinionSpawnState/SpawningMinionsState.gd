@@ -4,7 +4,6 @@ class_name SpawningMinionsState extends State
 @export var recharge_state : State
 @onready var radius := _get_hypotenuse()
 @onready var spawn_timer := $SpawnInterval
-@onready var recharge_timer := $RechargeInterval
 
 var minions : Array[NecromancerMinion]
 const MAX_MINIONS := 6

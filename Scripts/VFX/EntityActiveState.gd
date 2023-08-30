@@ -4,7 +4,6 @@ class_name EntityActiveState extends EntityState
 @export var root_node : Node2D
 
 func on_enter():
-	print("switching")
 	playback.travel(active_animation)
 	
 func on_exit():
