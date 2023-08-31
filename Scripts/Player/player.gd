@@ -5,7 +5,7 @@ class_name Player extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine: CharacterStateMachine = $CharacterStateMachine
-var damageable_node : Damageable
+@onready var damageable_node : Damageable = $Damageable
 
 var jump_velocity: int = -500
 
@@ -23,13 +23,12 @@ var facing : int = 1
 	
 func _ready():
 	animation_tree.active = true
-	damageable_node = $Damageable
 
 func update_animation_parameters(animation_tree_parameter_path: String):
 	animation_tree.set(animation_tree_parameter_path, direction)
 
 func update_facing_direction():
-	if $Damageable.health > 0 and state_machine.check_if_can_change_direction():
+	if damageable_node.health > 0 and state_machine.check_if_can_change_direction():
 		if direction > 0:
 			sprite.flip_h = false
 		elif direction < 0:

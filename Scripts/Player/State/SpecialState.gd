@@ -1,4 +1,4 @@
-extends State
+class_name SpecialState extends State
 
 @export var idle_state: State
 @export var special_charge_node: String
@@ -14,6 +14,10 @@ var charge_power: int = 0
 var charge_started: int
 var is_charged: bool = false
 var is_released: bool = false
+
+var total_charge_amount := 1.0
+
+signal combo_charge(combo_percentage : float)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,6 +35,7 @@ func on_exit():
 	is_released = false
 	self.can_change_direction = true
 	charge_power = 0
+	combo_charge.emit(charge_power)
 	
 func unleash():
 	is_released = true
@@ -51,15 +56,22 @@ func apply_friction():
 	else:
 		character.velocity.x += special_velocity_friction
 
+func charge_up():
+	var curr_progress = Time.get_ticks_msec() - charge_started
+	charge_power = curr_progress * charge_rate
+	combo_charge.emit(float(charge_power) / max_charge_time)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	charge_power = (Time.get_ticks_msec() - charge_started) * charge_rate
+func state_process(delta):
 	if is_released:
 		apply_friction()
 		if (character.velocity.x <= 0 and character.facing > 0) or (character.velocity.x >= 0 and character.facing < 0):
 			character.velocity.x = 0
 			playback.travel(special_recover_node)
 			is_released = false
+	else:
+		if not playback.get_current_node() == special_recover_node:	
+			charge_up()
 			
 func _on_animation_tree_animation_finished(anim_name):
 #   finished charging the special

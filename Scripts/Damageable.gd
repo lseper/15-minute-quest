@@ -17,6 +17,7 @@ func hit(damage: int):
 	health -= damage
 	emit_signal("on_hit", get_parent(), damage)
 	if health <= 0:
+		SignalBus.emit_signal("on_enemy_death")
 		# manage the queue_free in the entity itself then
 		if not await_death_animation:
 			get_parent().queue_free()

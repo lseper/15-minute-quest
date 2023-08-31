@@ -16,9 +16,8 @@ script = ExtResource("1_08cst")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="EntityStateMachine" type="Node" parent="." node_paths=PackedStringArray("root", "animation_tree")]
+[node name="EntityStateMachine" type="Node" parent="." node_paths=PackedStringArray("root")]
 script = ExtResource("1_t8y7w")
 root = NodePath("..")
-animation_tree = NodePath("")
 
 [connection signal="body_entered" from="HitboxArea" to="HitboxArea" method="_on_body_entered"]

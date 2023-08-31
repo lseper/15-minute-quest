@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3crwtpn4iuiw"]
+
+[ext_resource type="Texture2D" uid="uid://c2qftt2u1d0xb" path="res://Imported Assets/UI/Pixel UI pack 3/All-export-400.png" id="1_lo4sd"]
+[ext_resource type="Script" path="res://Scripts/UI/combo_bar_actual.gd" id="1_mbvj3"]
+[ext_resource type="Theme" uid="uid://bbpeuexxw4qjt" path="res://Theme/default_theme.tres" id="3_b2nw7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgbjs"]
+atlas = ExtResource("1_lo4sd")
+region = Rect2(2315, 396, 170, 45.3798)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4wk5"]
+atlas = ExtResource("1_lo4sd")
+region = Rect2(2524, 345, 136, 20)
+
+[node name="ComboBar" type="Node2D"]
+script = ExtResource("1_mbvj3")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+value = 100.0
+texture_under = SubResource("AtlasTexture_jgbjs")
+texture_progress = SubResource("AtlasTexture_w4wk5")
+texture_progress_offset = Vector2(16, 12)
+
+[node name="ComboMultiplier" type="Label" parent="."]
+offset_left = 177.0
+offset_right = 244.0
+offset_bottom = 44.0
+theme = ExtResource("3_b2nw7")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "x 1.2"
+vertical_alignment = 1
+
+[node name="ComboLabel" type="Label" parent="."]
+offset_left = 11.0
+offset_top = 70.0
+offset_right = 109.0
+offset_bottom = 110.0
+theme = ExtResource("3_b2nw7")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 36
+text = "Combo: "
+
+[node name="ComboNumber" type="Label" parent="ComboLabel"]
+layout_mode = 0
+offset_left = 99.0
+offset_top = -3.0
+offset_right = 167.0
+offset_bottom = 76.0
+theme = ExtResource("3_b2nw7")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 75
+text = "22"
+horizontal_alignment = 1
+vertical_alignment = 1

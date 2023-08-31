@@ -6,7 +6,7 @@ func set_progress_by_change(change: int):
 	progress_percentage_bar.value = progress_percentage_bar.value + change
 
 func set_progress_by_percent(percent : float):
-	progress_percentage_bar.value = percent * 100
+	progress_percentage_bar.value = clamp(percent * 100, 0, 100)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -5,7 +5,6 @@ class_name Pickup extends Area2D
 @onready var pickup_delay_timer := $SpawnTimer
 @onready var despawn_timer := $DespawnTimer
 
-
 func buff(collector: MainPlayer):
 	pass
 	
