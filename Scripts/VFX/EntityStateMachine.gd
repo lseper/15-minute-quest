@@ -1,7 +1,6 @@
 class_name EntityStateMachine extends Node
 
-@export var root: Node2D
-@export var aoe: Area2D
+@export var root: Area2D
 @export var current_state: EntityState
 @export var animation_tree: AnimationTree
 
@@ -21,8 +20,6 @@ func _ready():
 	for child in get_children():
 		if child is EntityState:
 			states.append(child)
-			# TODO: Set states up with what they need to function
-			child.aoe = aoe
 			child.playback = animation_tree["parameters/playback"]
 			# connect to interrupt signal
 			child.connect("interrupt_entity_state", on_state_interrupt_state)

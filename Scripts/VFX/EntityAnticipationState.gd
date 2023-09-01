@@ -2,7 +2,6 @@ class_name EntityAnticipationState extends EntityState
 
 @export var anticipation_animation : String
 @export var active_state : EntityState
-@onready var anticipation_time: Timer = $Timer
 
 func on_enter():
 	playback.travel(anticipation_animation)
@@ -18,5 +17,6 @@ func _ready():
 func state_process(delta):
 	pass
 
-func _on_timer_timeout():
-	next_state = active_state
+func _on_animation_tree_animation_finished(anim_name):
+	if anim_name == anticipation_animation:
+		next_state = active_state

@@ -460,7 +460,6 @@ player_damageable_node = NodePath("../Damageable")
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("16_cfr32")
-damage = 25
 slime = NodePath("..")
 slime_hitbox_collision = NodePath("SlimeHitboxCollision")
 
@@ -473,6 +472,7 @@ facing_left_position = Vector2(5, 4)
 facing_right_position = Vector2(-7, 4)
 
 [node name="PositionDebugLabel" parent="." instance=ExtResource("20_cy1j8")]
+visible = false
 
 [connection signal="facing_direction_changed" from="." to="." method="_on_facing_direction_changed"]
 [connection signal="frame_changed" from="Sprite2D" to="." method="_on_sprite_2d_frame_changed"]

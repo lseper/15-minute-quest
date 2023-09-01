@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://74yhfcjfjj3u"]
+[gd_scene load_steps=13 format=3 uid="uid://74yhfcjfjj3u"]
 
 [ext_resource type="PackedScene" uid="uid://5h3jsfgmmdng" path="res://Scenes/World/world.tscn" id="1_jlsda"]
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_kxqkl"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cwbrbowvi40bb" path="res://Scenes/UI/ui.tscn" id="5_bwqe8"]
 [ext_resource type="PackedScene" uid="uid://cg5oebsjapbdm" path="res://Scenes/World/item_manager.tscn" id="6_50s3c"]
 [ext_resource type="Script" path="res://Scenes/World/item_manager.gd" id="7_mfrkh"]
+[ext_resource type="PackedScene" uid="uid://jdtjknljlkyl" path="res://Scenes/Entities/Necromancer/Necromancer.tscn" id="9_3m1wv"]
 [ext_resource type="Script" path="res://Scripts/World/EntityManager.gd" id="9_gfyiw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gw0s"]
@@ -72,3 +73,7 @@ position = Vector2(0, -193)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/Floor"]
 position = Vector2(588.5, 659.5)
 shape = SubResource("RectangleShape2D_yyd73")
+
+[node name="Necromancer" parent="." node_paths=PackedStringArray("seeking") instance=ExtResource("9_3m1wv")]
+position = Vector2(458, 22)
+seeking = NodePath("../Player")

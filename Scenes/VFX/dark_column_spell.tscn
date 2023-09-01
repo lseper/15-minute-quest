@@ -1,0 +1,227 @@
+[gd_scene load_steps=18 format=3 uid="uid://deu6y6hi6l7u2"]
+
+[ext_resource type="PackedScene" uid="uid://clpkvg4ujbsdt" path="res://Scenes/VFX/spell.tscn" id="1_c8mvw"]
+[ext_resource type="Script" path="res://Scripts/VFX/bullet.gd" id="2_shbpw"]
+[ext_resource type="Script" path="res://Scripts/VFX/EntityActiveState.gd" id="3_ffoaw"]
+[ext_resource type="Texture2D" uid="uid://dgtq6i2w1488d" path="res://Imported Assets/VFX/Dark VFX 01 - 02/Dark VFX 2/Dark VFX 2 (48x64).png" id="3_nsfin"]
+[ext_resource type="Texture2D" uid="uid://cayagk1xyyka2" path="res://Imported Assets/VFX/Dark VFX 01 - 02/Dark VFX 3/Dark Column.png" id="4_8g88a"]
+[ext_resource type="Script" path="res://Scripts/VFX/EntityAnticipationState.gd" id="4_8whq7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xejmw"]
+size = Vector2(29, 40)
+
+[sub_resource type="Animation" id="Animation_f8tcu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_j8dgi"]
+resource_name = "active"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_8g88a")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_2i7g3"]
+resource_name = "anticipation"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_nsfin")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bddli"]
+_data = {
+"RESET": SubResource("Animation_f8tcu"),
+"active": SubResource("Animation_j8dgi"),
+"anticipation": SubResource("Animation_2i7g3")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_722p6"]
+animation = &"active"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qhldm"]
+animation = &"anticipation"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t7nch"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0qpy1"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aas6y"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ulw7p"]
+states/active/node = SubResource("AnimationNodeAnimation_722p6")
+states/active/position = Vector2(564.5, 100.5)
+states/anticipation/node = SubResource("AnimationNodeAnimation_qhldm")
+states/anticipation/position = Vector2(398.5, 100.25)
+transitions = ["Start", "anticipation", SubResource("AnimationNodeStateMachineTransition_t7nch"), "anticipation", "active", SubResource("AnimationNodeStateMachineTransition_0qpy1"), "active", "End", SubResource("AnimationNodeStateMachineTransition_aas6y")]
+
+[node name="HitboxArea" instance=ExtResource("1_c8mvw")]
+scale = Vector2(2, 2)
+collision_mask = 3
+script = ExtResource("2_shbpw")
+
+[node name="Hitbox" parent="." index="0"]
+position = Vector2(0.5, 3)
+shape = SubResource("RectangleShape2D_xejmw")
+disabled = true
+right_hitbox_position = Vector2(0.5, 3)
+left_hitbox_position = Vector2(0.5, 3)
+
+[node name="AnimationPlayer" parent="." index="1"]
+root_node = NodePath("..")
+libraries = {
+"": SubResource("AnimationLibrary_bddli")
+}
+
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("4_8g88a")
+hframes = 16
+
+[node name="EntityStateMachine" parent="." index="3" node_paths=PackedStringArray("root", "current_state", "animation_tree")]
+root = NodePath("..")
+current_state = NodePath("EntityAnticipationState")
+animation_tree = NodePath("../AnimationTree")
+
+[node name="EntityActiveState" type="Node" parent="EntityStateMachine" index="0" node_paths=PackedStringArray("root_node")]
+script = ExtResource("3_ffoaw")
+active_animation = "active"
+root_node = NodePath("../..")
+
+[node name="EntityAnticipationState" type="Node" parent="EntityStateMachine" index="1" node_paths=PackedStringArray("active_state")]
+script = ExtResource("4_8whq7")
+anticipation_animation = "anticipation"
+active_state = NodePath("../EntityActiveState")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource("AnimationNodeStateMachine_ulw7p")
+anim_player = NodePath("../AnimationPlayer")
+active = true

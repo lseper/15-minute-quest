@@ -1,15 +1,13 @@
 class_name PlayerHitState extends HitState
 
 @onready var invincibility_timer = $InvincibilityTimer
-@export var ground_state = GroundState
+@export var neutral_state : State
 
 func on_enter():
 	invincibility_timer.start()
-	invincibility_timer.paused = false
-	# TODO: add player hit animation
 	
 func on_exit():
-	invincibility_timer.paused = true
+	invincibility_timer.stop()
 
 func _on_invincibility_timer_timeout():
-	next_state = ground_state
+	next_state = neutral_state

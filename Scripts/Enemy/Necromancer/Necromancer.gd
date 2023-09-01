@@ -3,6 +3,7 @@ class_name Necromancer extends Player
 @export var seeking: Player
 @export var necromancer_minion: PackedScene
 @export var dark_spell : PackedScene
+@export var dark_bullet_spell : PackedScene
 
 func _process(_delta):
 	update_animation_parameters("parameters/idle/blend_position")

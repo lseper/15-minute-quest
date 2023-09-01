@@ -6,6 +6,9 @@ class_name CharacterStateMachine extends Node
 
 var states: Array[State]
 
+func is_valid_state(state: State):
+	return states.has(state)
+
 func check_if_can_move() -> bool:
 	return current_state.can_move
 
@@ -30,11 +33,12 @@ func _ready():
 	current_state.on_enter()
 
 func switch_states(new_state: State):
-	if current_state != null:
-		current_state.on_exit()
-		current_state.next_state = null
-	current_state = new_state
-	current_state.on_enter()
+	if is_valid_state(new_state):
+		if current_state != null:
+			current_state.on_exit()
+			current_state.next_state = null
+		current_state = new_state
+		current_state.on_enter()
 
 func _physics_process(delta):
 	if(current_state.next_state != null):

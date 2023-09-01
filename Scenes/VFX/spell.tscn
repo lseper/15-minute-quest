@@ -1,23 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://clpkvg4ujbsdt"]
+[gd_scene load_steps=4 format=3 uid="uid://clpkvg4ujbsdt"]
 
 [ext_resource type="Script" path="res://Scripts/VFX/SpellAreaOfEffect.gd" id="1_08cst"]
 [ext_resource type="Script" path="res://Scripts/VFX/EntityStateMachine.gd" id="1_t8y7w"]
+[ext_resource type="Script" path="res://Scripts/VFX/SpellHitbox.gd" id="2_i3s52"]
 
-[node name="spell" type="Node2D"]
-
-[node name="HitboxArea" type="Area2D" parent="."]
+[node name="HitboxArea" type="Area2D"]
 collision_layer = 0
-collision_mask = 6
+collision_mask = 7
 script = ExtResource("1_08cst")
 
-[node name="Hitbox" type="CollisionShape2D" parent="HitboxArea"]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+script = ExtResource("2_i3s52")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="EntityStateMachine" type="Node" parent="." node_paths=PackedStringArray("root")]
+[node name="EntityStateMachine" type="Node" parent="."]
 script = ExtResource("1_t8y7w")
-root = NodePath("..")
 
-[connection signal="body_entered" from="HitboxArea" to="HitboxArea" method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,11 +1,12 @@
-[gd_scene load_steps=47 format=3 uid="uid://jdtjknljlkyl"]
+[gd_scene load_steps=48 format=3 uid="uid://jdtjknljlkyl"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/Necromancer/Necromancer.gd" id="1_0o0sf"]
 [ext_resource type="Texture2D" uid="uid://bpg5pfom4x8ck" path="res://Imported Assets/Enemies/Necromancer_creativekind-Sheet.png" id="1_y6d11"]
 [ext_resource type="PackedScene" uid="uid://b0odo6b6genc4" path="res://Scenes/Entities/Necromancer/necromancer_minion.tscn" id="2_7vrej"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Necromancer/State/NecromancerStateMachine.gd" id="2_myrnh"]
-[ext_resource type="PackedScene" uid="uid://cup85djd0pfg8" path="res://Scenes/VFX/dark_spell.tscn" id="3_3bxhp"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Necromancer/State/NecromancerIdleState.gd" id="3_rmrdp"]
+[ext_resource type="PackedScene" uid="uid://deu6y6hi6l7u2" path="res://Scenes/VFX/dark_column_spell.tscn" id="3_uethm"]
+[ext_resource type="PackedScene" uid="uid://kx5rl46amy5h" path="res://Scenes/VFX/dark_bullet_spell.tscn" id="4_yeibj"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Necromancer/State/NecromancerAttackState.gd" id="5_r3ybu"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Necromancer/State/NecromancerDeathState.gd" id="6_g4uxd"]
 [ext_resource type="Script" path="res://Scripts/Enemy/Necromancer/State/NecromancerHurtState.gd" id="7_1kg7s"]
@@ -558,7 +559,8 @@ graph_offset = Vector2(261.757, 36.9875)
 collision_layer = 4
 script = ExtResource("1_0o0sf")
 necromancer_minion = ExtResource("2_7vrej")
-dark_spell = ExtResource("3_3bxhp")
+dark_spell = ExtResource("3_uethm")
+dark_bullet_spell = ExtResource("4_yeibj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 0)
@@ -610,8 +612,10 @@ can_move = false
 can_change_direction = false
 can_fall = false
 
-[node name="SpellTimer" type="Timer" parent="CharacterStateMachine/NecromancerAttackState"]
+[node name="MinorSpellTimer" type="Timer" parent="CharacterStateMachine/NecromancerAttackState"]
 wait_time = 0.5
+
+[node name="MajorSpellTimer" type="Timer" parent="CharacterStateMachine/NecromancerAttackState"]
 
 [node name="NecromancerDeathState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("necromancer_collision")]
 script = ExtResource("6_g4uxd")
@@ -630,6 +634,7 @@ can_change_direction = false
 can_fall = false
 
 [node name="StateDebugLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("8_k4c50")]
+visible = false
 offset_left = -81.0
 offset_top = -127.0
 offset_right = -32.0
@@ -643,6 +648,7 @@ health = 200.0
 await_death_animation = true
 
 [node name="HealthDebugLabel" parent="." node_paths=PackedStringArray("player_damageable_node") instance=ExtResource("10_gh1d4")]
+visible = false
 offset_left = -92.0
 offset_top = -108.0
 offset_right = -32.0
@@ -675,6 +681,7 @@ wait_time = 4.0
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/NecromancerDeathState" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/NecromancerHurtState" method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="CharacterStateMachine/NecromancerIdleState/AttackDelayTimer" to="CharacterStateMachine/NecromancerIdleState" method="_on_vulnerable_timer_timeout"]
-[connection signal="timeout" from="CharacterStateMachine/NecromancerAttackState/SpellTimer" to="CharacterStateMachine/NecromancerAttackState" method="_on_minor_spell_timer_timeout"]
+[connection signal="timeout" from="CharacterStateMachine/NecromancerAttackState/MinorSpellTimer" to="CharacterStateMachine/NecromancerAttackState" method="_on_minor_spell_timer_timeout"]
+[connection signal="timeout" from="CharacterStateMachine/NecromancerAttackState/MajorSpellTimer" to="CharacterStateMachine/NecromancerAttackState" method="_on_major_spell_timer_timeout"]
 [connection signal="timeout" from="NecromancerMinionSpawnStateMachine/SpawningMinionsState/SpawnInterval" to="NecromancerMinionSpawnStateMachine/SpawningMinionsState" method="_on_spawn_interval_timeout"]
 [connection signal="timeout" from="NecromancerMinionSpawnStateMachine/RechargeState/RechargeInterval" to="NecromancerMinionSpawnStateMachine/RechargeState" method="_on_recharge_interval_timeout"]
