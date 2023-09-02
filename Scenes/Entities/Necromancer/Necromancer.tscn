@@ -600,6 +600,7 @@ damageable_node = NodePath("../../Damageable")
 can_fall = false
 
 [node name="AttackDelayTimer" type="Timer" parent="CharacterStateMachine/NecromancerIdleState"]
+wait_time = 5.0
 autostart = true
 
 [node name="NecromancerAttackState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state")]
@@ -613,9 +614,10 @@ can_change_direction = false
 can_fall = false
 
 [node name="MinorSpellTimer" type="Timer" parent="CharacterStateMachine/NecromancerAttackState"]
-wait_time = 0.5
+wait_time = 0.75
 
 [node name="MajorSpellTimer" type="Timer" parent="CharacterStateMachine/NecromancerAttackState"]
+wait_time = 3.0
 
 [node name="NecromancerDeathState" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("necromancer_collision")]
 script = ExtResource("6_g4uxd")
@@ -675,7 +677,7 @@ script = ExtResource("14_tsbdf")
 spawn_state = NodePath("../SpawningMinionsState")
 
 [node name="RechargeInterval" type="Timer" parent="NecromancerMinionSpawnStateMachine/RechargeState"]
-wait_time = 4.0
+wait_time = 14.0
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/NecromancerAttackState" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/NecromancerDeathState" method="_on_animation_tree_animation_finished"]

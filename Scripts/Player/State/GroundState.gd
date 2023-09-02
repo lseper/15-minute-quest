@@ -23,7 +23,7 @@ func death():
 	
 # TODO: move ot NPC shop heal
 func heal():
-	player.damageable_node.hit(-5)
+	player.damageable_node.hit(-25)
 
 func state_input(event: InputEvent):
 	if event.is_action_pressed("ui_up"):

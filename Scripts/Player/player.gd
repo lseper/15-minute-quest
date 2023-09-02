@@ -7,7 +7,7 @@ class_name Player extends CharacterBody2D
 @onready var state_machine: CharacterStateMachine = $CharacterStateMachine
 @onready var damageable_node : Damageable = $Damageable
 
-var jump_velocity: int = -500
+@export var jump_velocity: int = -550
 
 signal facing_direction_changed(facing_right: bool)
 

@@ -40,11 +40,16 @@ position = Vector2(589, 332)
 player = NodePath("../Player")
 item_manager = NodePath("../ItemManager")
 
-[node name="Player" parent="." instance=ExtResource("2_7lb5d")]
-position = Vector2(652, 237)
+[node name="Necromancer" parent="." node_paths=PackedStringArray("seeking", "ground") instance=ExtResource("9_3m1wv")]
+position = Vector2(458, 22)
+seeking = NodePath("../Player")
+ground = NodePath("../WorldBoundaries/Floor")
 
 [node name="EntityManager" type="Node2D" parent="."]
 script = ExtResource("9_gfyiw")
+
+[node name="Player" parent="." instance=ExtResource("2_7lb5d")]
+position = Vector2(652, 237)
 
 [node name="WorldBoundaries" type="Node2D" parent="."]
 
@@ -73,7 +78,3 @@ position = Vector2(0, -193)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/Floor"]
 position = Vector2(588.5, 659.5)
 shape = SubResource("RectangleShape2D_yyd73")
-
-[node name="Necromancer" parent="." node_paths=PackedStringArray("seeking") instance=ExtResource("9_3m1wv")]
-position = Vector2(458, 22)
-seeking = NodePath("../Player")

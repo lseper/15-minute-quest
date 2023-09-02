@@ -1154,12 +1154,11 @@ character = NodePath("..")
 current_state = NodePath("Neutral")
 animation_tree = NodePath("../AnimationTree")
 
-[node name="Hit" type="Node" parent="CharacterVulnerabilityMachine" node_paths=PackedStringArray("neutral_state", "damageable_node", "death_state", "hit_state")]
+[node name="Hit" type="Node" parent="CharacterVulnerabilityMachine" node_paths=PackedStringArray("neutral_state", "damageable_node", "death_state")]
 script = ExtResource("9_oepnm")
 neutral_state = NodePath("../Neutral")
 damageable_node = NodePath("../../Damageable")
 death_state = NodePath("../../CharacterStateMachine/Death")
-hit_state = NodePath(".")
 
 [node name="InvincibilityTimer" type="Timer" parent="CharacterVulnerabilityMachine/Hit"]
 

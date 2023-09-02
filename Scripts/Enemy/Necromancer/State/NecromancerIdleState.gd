@@ -10,7 +10,8 @@ class_name NecromancerIdleState extends State
 @onready var curr_health : int
 
 var invincible := false
-const MIN_SPELL_WAIT_TIME := 0.5
+const MIN_SPELL_WAIT_TIME := 5.0
+const MAX_SPELL_WAIT_TIME := 10.0
 
 func hurt():
 	next_state = hurt_state
@@ -19,15 +20,15 @@ func die():
 	next_state = death_state
 
 func get_spell_wait_time():
-	return randf_range(MIN_SPELL_WAIT_TIME, 4.0)	
+	return randf_range(MIN_SPELL_WAIT_TIME, MAX_SPELL_WAIT_TIME)	
 
 func on_enter():
 	curr_health = damageable_node.health
-	spell_timer.paused = false
+	spell_timer.start()
 	playback.travel(idle_animation)
 
 func on_exit():
-	spell_timer.paused = true
+	spell_timer.stop()
 	curr_health = damageable_node.health
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

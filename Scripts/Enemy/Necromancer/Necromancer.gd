@@ -1,6 +1,7 @@
 class_name Necromancer extends Player
 	
 @export var seeking: Player
+@export var ground : StaticBody2D
 @export var necromancer_minion: PackedScene
 @export var dark_spell : PackedScene
 @export var dark_bullet_spell : PackedScene

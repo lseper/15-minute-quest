@@ -184,8 +184,8 @@ states/anticipation/node = SubResource("AnimationNodeAnimation_qhldm")
 states/anticipation/position = Vector2(398.5, 100.25)
 transitions = ["Start", "anticipation", SubResource("AnimationNodeStateMachineTransition_t7nch"), "anticipation", "active", SubResource("AnimationNodeStateMachineTransition_0qpy1"), "active", "End", SubResource("AnimationNodeStateMachineTransition_aas6y")]
 
-[node name="HitboxArea" instance=ExtResource("1_c8mvw")]
-scale = Vector2(2, 2)
+[node name="DarkBullet" instance=ExtResource("1_c8mvw")]
+scale = Vector2(3, 5)
 collision_mask = 3
 script = ExtResource("2_shbpw")
 
@@ -225,3 +225,5 @@ active_state = NodePath("../EntityActiveState")
 tree_root = SubResource("AnimationNodeStateMachine_ulw7p")
 anim_player = NodePath("../AnimationPlayer")
 active = true
+
+[connection signal="animation_finished" from="AnimationTree" to="EntityStateMachine/EntityActiveState" method="_on_animation_tree_animation_finished"]
