@@ -37,7 +37,7 @@ func _update_combo_bar(combo_percentage: float):
 func _update_actual_combo_bar(new_combo: int):
 	actual_combo_bar.set_combo(new_combo)
 	
-func _on_enemy_death():
+func _on_enemy_death(_experience: int):
 	combo_timer.start()
 	combo += 1
 	

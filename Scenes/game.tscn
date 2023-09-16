@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://74yhfcjfjj3u"]
+[gd_scene load_steps=15 format=3 uid="uid://74yhfcjfjj3u"]
 
 [ext_resource type="PackedScene" uid="uid://5h3jsfgmmdng" path="res://Scenes/World/world.tscn" id="1_jlsda"]
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_kxqkl"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://Scenes/World/item_manager.gd" id="7_mfrkh"]
 [ext_resource type="PackedScene" uid="uid://jdtjknljlkyl" path="res://Scenes/Entities/Necromancer/Necromancer.tscn" id="9_3m1wv"]
 [ext_resource type="Script" path="res://Scripts/World/EntityManager.gd" id="9_gfyiw"]
+[ext_resource type="Script" path="res://Scripts/World/WorldBoundaries.gd" id="10_0bd5o"]
+[ext_resource type="Script" path="res://Scripts/World/LevelManager.gd" id="11_mcokg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gw0s"]
 size = Vector2(185, 1279)
@@ -25,6 +27,8 @@ script = ExtResource("1_kxqkl")
 player = NodePath("Player")
 ui = NodePath("UI")
 item_manager = NodePath("ItemManager")
+slime_spawner = ExtResource("3_s06tg")
+necromancer = ExtResource("9_3m1wv")
 
 [node name="Background" parent="." instance=ExtResource("1_jlsda")]
 position = Vector2(834, -38)
@@ -35,16 +39,6 @@ position = Vector2(834, -38)
 position = Vector2(-383, -546)
 script = ExtResource("7_mfrkh")
 
-[node name="SlimeSpawner" parent="." node_paths=PackedStringArray("player", "item_manager") instance=ExtResource("3_s06tg")]
-position = Vector2(589, 332)
-player = NodePath("../Player")
-item_manager = NodePath("../ItemManager")
-
-[node name="Necromancer" parent="." node_paths=PackedStringArray("seeking", "ground") instance=ExtResource("9_3m1wv")]
-position = Vector2(458, 22)
-seeking = NodePath("../Player")
-ground = NodePath("../WorldBoundaries/Floor")
-
 [node name="EntityManager" type="Node2D" parent="."]
 script = ExtResource("9_gfyiw")
 
@@ -52,6 +46,7 @@ script = ExtResource("9_gfyiw")
 position = Vector2(652, 237)
 
 [node name="WorldBoundaries" type="Node2D" parent="."]
+script = ExtResource("10_0bd5o")
 
 [node name="LeftBoundary" type="StaticBody2D" parent="WorldBoundaries"]
 
@@ -78,3 +73,6 @@ position = Vector2(0, -193)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/Floor"]
 position = Vector2(588.5, 659.5)
 shape = SubResource("RectangleShape2D_yyd73")
+
+[node name="LevelManager" type="Node" parent="."]
+script = ExtResource("11_mcokg")

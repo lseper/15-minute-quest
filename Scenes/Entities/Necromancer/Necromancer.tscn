@@ -573,6 +573,7 @@ scale = Vector2(3, 3)
 texture = ExtResource("1_y6d11")
 hframes = 17
 vframes = 7
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -582,6 +583,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_sfyum")
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/idle/blend_position = -0.000269055
 
 [node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state", "animation_tree")]

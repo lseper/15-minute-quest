@@ -23,6 +23,10 @@ SignalBus="*res://Scripts/Global/signal_bus.gd"
 window/size/viewport_width=1920
 window/size/viewport_height=1280
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
+
 [layer_names]
 
 2d_physics/layer_1="surfaces"

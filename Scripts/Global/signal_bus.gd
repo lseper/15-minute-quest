@@ -4,4 +4,4 @@ signal on_health_changed(node: Node, amount_changed: int)
 
 signal on_entity_spawned(spawn_position : Vector2, entity: Node2D)
 
-signal on_enemy_death()
+signal on_enemy_death(experience: int)

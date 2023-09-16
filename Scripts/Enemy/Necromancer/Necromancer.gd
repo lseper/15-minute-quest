@@ -8,7 +8,7 @@ class_name Necromancer extends Player
 
 func _process(_delta):
 	update_animation_parameters("parameters/idle/blend_position")
-	
+			
 # override player inputs
 func _input(event):
 	pass
