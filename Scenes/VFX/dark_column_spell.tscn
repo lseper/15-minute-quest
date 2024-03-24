@@ -203,7 +203,7 @@ libraries = {
 }
 
 [node name="Sprite2D" parent="." index="2"]
-texture = ExtResource("4_8g88a")
+texture = ExtResource("3_nsfin")
 hframes = 16
 
 [node name="EntityStateMachine" parent="." index="3" node_paths=PackedStringArray("root", "current_state", "animation_tree")]

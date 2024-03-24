@@ -76,3 +76,13 @@ shape = SubResource("RectangleShape2D_yyd73")
 
 [node name="LevelManager" type="Node" parent="."]
 script = ExtResource("11_mcokg")
+
+[node name="SlimeSpawner" parent="." node_paths=PackedStringArray("player", "item_manager") instance=ExtResource("3_s06tg")]
+position = Vector2(589, 338)
+player = NodePath("../Player")
+item_manager = NodePath("../ItemManager")
+
+[connection signal="boss_fight" from="LevelManager" to="." method="_on_level_manager_boss_fight"]
+[connection signal="experience_change" from="LevelManager" to="UI" method="_on_level_manager_experience_change"]
+[connection signal="level_up" from="LevelManager" to="." method="_on_level_manager_level_up"]
+[connection signal="level_up" from="LevelManager" to="UI" method="_on_level_manager_level_up"]

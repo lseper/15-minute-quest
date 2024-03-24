@@ -11,7 +11,7 @@ class_name NecromancerIdleState extends State
 
 var invincible := false
 const MIN_SPELL_WAIT_TIME := 5.0
-const MAX_SPELL_WAIT_TIME := 10.0
+const MAX_SPELL_WAIT_TIME := 8.0
 
 func hurt():
 	next_state = hurt_state

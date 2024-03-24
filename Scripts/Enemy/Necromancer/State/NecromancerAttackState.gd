@@ -33,7 +33,6 @@ func _get_spell_spawn_position():
 		return character.position
 		
 func _spawn_spell_at_player_foot():
-	print(character.name)
 	var spawn_position = Vector2(_get_spell_spawn_position().x, character.ground.global_position.y)
 	var dark_spell_instance = character.dark_spell.instantiate()
 	var dark_spell_shape = dark_spell_instance.get_node("Hitbox").shape
@@ -86,10 +85,8 @@ func on_enter():
 	var spell_choice = randi_range(0, SPELL.size() - 1)
 	if spell_choice == SPELL.MINOR:
 		minor_spell()
-	elif spell_choice == SPELL.SKULL:
-		minor_spell()
 	else:
-		minor_spell()
+		major_spell()
 		
 func on_exit():
 	pass

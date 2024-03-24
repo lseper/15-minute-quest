@@ -1,12 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwbrbowvi40bb"]
+[gd_scene load_steps=11 format=3 uid="uid://cwbrbowvi40bb"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ui.gd" id="1_mwhm2"]
 [ext_resource type="PackedScene" uid="uid://be0eiqykrmuhm" path="res://Scenes/UI/bar.tscn" id="2_fgqje"]
 [ext_resource type="PackedScene" uid="uid://dqn1tkwqwpqit" path="res://Scenes/UI/label_and_number.tscn" id="3_uhnni"]
+[ext_resource type="Theme" uid="uid://bbpeuexxw4qjt" path="res://Theme/default_theme.tres" id="4_7be5m"]
 [ext_resource type="PackedScene" uid="uid://rhha2mond5q4" path="res://Scenes/UI/counter.tscn" id="4_gjxvb"]
 [ext_resource type="PackedScene" uid="uid://b7blpwuu7wxav" path="res://Scenes/UI/health_bar.tscn" id="5_qe85a"]
 [ext_resource type="PackedScene" uid="uid://cykfe031fctbv" path="res://Scenes/UI/combo_bar.tscn" id="6_ckgcu"]
 [ext_resource type="PackedScene" uid="uid://c3crwtpn4iuiw" path="res://Scenes/UI/combo_bar_actual.tscn" id="7_ibwql"]
+[ext_resource type="FontFile" uid="uid://dweflrak54r34" path="res://Imported Assets/DungeonFont.ttf" id="9_akssg"]
+
+[sub_resource type="Theme" id="Theme_vgp70"]
+default_font = ExtResource("9_akssg")
+default_font_size = 24
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_mwhm2")
@@ -33,6 +39,8 @@ offset_bottom = 1283.0
 [node name="Score" parent="." instance=ExtResource("3_uhnni")]
 offset_top = 813.0
 offset_bottom = 870.0
+label_text = "Score:"
+label_theme = ExtResource("4_7be5m")
 
 [node name="Coins" parent="." instance=ExtResource("4_gjxvb")]
 offset_left = 1786.0
@@ -53,5 +61,23 @@ position = Vector2(171, 29)
 
 [node name="ComboTimer" type="Timer" parent="."]
 wait_time = 4.0
+
+[node name="Level" parent="." instance=ExtResource("3_uhnni")]
+offset_left = 1596.0
+offset_top = 37.0
+offset_right = 1741.0
+offset_bottom = 94.0
+label_text = "Level:"
+label_color = Color(1, 0.776471, 0, 1)
+label_theme = ExtResource("4_7be5m")
+
+[node name="Experience" parent="." instance=ExtResource("3_uhnni")]
+offset_left = 1325.0
+offset_top = 37.0
+offset_right = 1596.0
+offset_bottom = 94.0
+label_text = "Exp nxt Lvl:"
+label_color = Color(0.305882, 0.74902, 0.937255, 1)
+label_theme = SubResource("Theme_vgp70")
 
 [connection signal="timeout" from="ComboTimer" to="." method="_on_combo_timer_timeout"]

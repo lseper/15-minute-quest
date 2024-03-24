@@ -20,6 +20,8 @@ func _setup_slime_spawner():
 # use for boss-fights 
 func _disable_slime_spawner():
 	var slime_spawner = $SlimeSpawner
+	for remaining_slime in slime_spawner.get_children():
+		remaining_slime.queue_free()
 	slime_spawner.process_mode = Node.PROCESS_MODE_DISABLED
 
 # use to re-enable in boss-fights
@@ -27,7 +29,7 @@ func _enable_slime_spawner():
 	var slime_spawner = $SlimeSpawner
 	slime_spawner.process_mode = Node.PROCESS_MODE_INHERIT
 	
-func _setup_necromancer():
+func _spawn_necromancer():
 	var necromancer_instance = necromancer.instantiate()
 	necromancer_instance.seeking = player
 	necromancer_instance.ground = floor
@@ -46,3 +48,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func _on_level_manager_boss_fight(boss):
+	_disable_slime_spawner()
+	_spawn_necromancer()

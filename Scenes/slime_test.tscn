@@ -1,0 +1,83 @@
+[gd_scene load_steps=15 format=3 uid="uid://ce1qpqiir47ag"]
+
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_4mifs"]
+[ext_resource type="PackedScene" uid="uid://b6vw65653q1m1" path="res://Scenes/slime_spawner.tscn" id="2_gnqhj"]
+[ext_resource type="PackedScene" uid="uid://jdtjknljlkyl" path="res://Scenes/Entities/Necromancer/Necromancer.tscn" id="3_8upfq"]
+[ext_resource type="PackedScene" uid="uid://5h3jsfgmmdng" path="res://Scenes/World/world.tscn" id="4_slpd7"]
+[ext_resource type="PackedScene" uid="uid://cwbrbowvi40bb" path="res://Scenes/UI/ui.tscn" id="5_kavuw"]
+[ext_resource type="PackedScene" uid="uid://cg5oebsjapbdm" path="res://Scenes/World/item_manager.tscn" id="6_iylla"]
+[ext_resource type="Script" path="res://Scenes/World/item_manager.gd" id="7_qn576"]
+[ext_resource type="Script" path="res://Scripts/World/EntityManager.gd" id="8_vy0s3"]
+[ext_resource type="PackedScene" uid="uid://blbs5jbyvy4o0" path="res://Scenes/Entities/Player/player.tscn" id="9_ulahs"]
+[ext_resource type="Script" path="res://Scripts/World/WorldBoundaries.gd" id="10_2qai1"]
+[ext_resource type="Script" path="res://Scripts/World/LevelManager.gd" id="11_xf7os"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gw0s"]
+size = Vector2(185, 1279)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24ikj"]
+size = Vector2(218, 1916)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yyd73"]
+size = Vector2(1919, 327)
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("player", "ui", "item_manager")]
+position = Vector2(371, 459)
+script = ExtResource("1_4mifs")
+player = NodePath("Player")
+ui = NodePath("UI")
+item_manager = NodePath("ItemManager")
+slime_spawner = ExtResource("2_gnqhj")
+necromancer = ExtResource("3_8upfq")
+
+[node name="Background" parent="." instance=ExtResource("4_slpd7")]
+position = Vector2(834, -38)
+
+[node name="UI" parent="." instance=ExtResource("5_kavuw")]
+
+[node name="ItemManager" parent="." instance=ExtResource("6_iylla")]
+position = Vector2(-383, -546)
+script = ExtResource("7_qn576")
+
+[node name="EntityManager" type="Node2D" parent="."]
+script = ExtResource("8_vy0s3")
+
+[node name="Player" parent="." instance=ExtResource("9_ulahs")]
+position = Vector2(652, 237)
+
+[node name="WorldBoundaries" type="Node2D" parent="."]
+script = ExtResource("10_2qai1")
+
+[node name="LeftBoundary" type="StaticBody2D" parent="WorldBoundaries"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/LeftBoundary"]
+position = Vector2(-463.5, 180)
+shape = SubResource("RectangleShape2D_8gw0s")
+
+[node name="RightBoundary" type="StaticBody2D" parent="WorldBoundaries"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/RightBoundary"]
+position = Vector2(1642, 182.5)
+shape = SubResource("RectangleShape2D_8gw0s")
+
+[node name="TopBoundary" type="StaticBody2D" parent="WorldBoundaries"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/TopBoundary"]
+position = Vector2(590, -347)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_24ikj")
+
+[node name="Floor" type="StaticBody2D" parent="WorldBoundaries"]
+position = Vector2(0, -193)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaries/Floor"]
+position = Vector2(588.5, 659.5)
+shape = SubResource("RectangleShape2D_yyd73")
+
+[node name="LevelManager" type="Node" parent="."]
+script = ExtResource("11_xf7os")
+
+[node name="SlimeSpawner" parent="." node_paths=PackedStringArray("player", "item_manager") instance=ExtResource("2_gnqhj")]
+position = Vector2(589, 338)
+player = NodePath("../Player")
+item_manager = NodePath("../ItemManager")
