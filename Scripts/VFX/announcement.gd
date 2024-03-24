@@ -1,15 +1,20 @@
-class_name WorldBoundary extends Node2D
+class_name Announcement extends Node2D
 
-@onready var left_boundary = $LeftBoundary
-@onready var right_boundary = $RightBoundary
-@onready var bottom_boundary = $Floor
-@onready var top_boundary = $TopBoundary
+@export var text := "Announcement!"
+
+@onready var label := $Text
+@onready var timer := $Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	label.text = text
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func _on_timer_timeout():
+	queue_free()

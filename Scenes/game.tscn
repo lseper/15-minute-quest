@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://74yhfcjfjj3u"]
+[gd_scene load_steps=16 format=3 uid="uid://74yhfcjfjj3u"]
 
 [ext_resource type="PackedScene" uid="uid://5h3jsfgmmdng" path="res://Scenes/World/world.tscn" id="1_jlsda"]
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_kxqkl"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/World/EntityManager.gd" id="9_gfyiw"]
 [ext_resource type="Script" path="res://Scripts/World/WorldBoundaries.gd" id="10_0bd5o"]
 [ext_resource type="Script" path="res://Scripts/World/LevelManager.gd" id="11_mcokg"]
+[ext_resource type="PackedScene" uid="uid://varswinkvv2k" path="res://Scenes/VFX/announcement.tscn" id="12_74cgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gw0s"]
 size = Vector2(185, 1279)
@@ -44,6 +45,7 @@ script = ExtResource("9_gfyiw")
 
 [node name="Player" parent="." instance=ExtResource("2_7lb5d")]
 position = Vector2(652, 237)
+level_up_announcement = ExtResource("12_74cgl")
 
 [node name="WorldBoundaries" type="Node2D" parent="."]
 script = ExtResource("10_0bd5o")
@@ -74,7 +76,7 @@ position = Vector2(0, -193)
 position = Vector2(588.5, 659.5)
 shape = SubResource("RectangleShape2D_yyd73")
 
-[node name="LevelManager" type="Node" parent="."]
+[node name="LevelManager" type="Node2D" parent="."]
 script = ExtResource("11_mcokg")
 
 [node name="SlimeSpawner" parent="." node_paths=PackedStringArray("player", "item_manager") instance=ExtResource("3_s06tg")]
@@ -84,5 +86,5 @@ item_manager = NodePath("../ItemManager")
 
 [connection signal="boss_fight" from="LevelManager" to="." method="_on_level_manager_boss_fight"]
 [connection signal="experience_change" from="LevelManager" to="UI" method="_on_level_manager_experience_change"]
-[connection signal="level_up" from="LevelManager" to="." method="_on_level_manager_level_up"]
 [connection signal="level_up" from="LevelManager" to="UI" method="_on_level_manager_level_up"]
+[connection signal="level_up" from="LevelManager" to="Player" method="_on_level_manager_level_up"]

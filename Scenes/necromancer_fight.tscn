@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cf5l07apvpcjl"]
+[gd_scene load_steps=16 format=3 uid="uid://cf5l07apvpcjl"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_ine2j"]
 [ext_resource type="PackedScene" uid="uid://b6vw65653q1m1" path="res://Scenes/slime_spawner.tscn" id="2_fg0uw"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scenes/World/item_manager.gd" id="7_bil4h"]
 [ext_resource type="Script" path="res://Scripts/World/EntityManager.gd" id="8_57uxh"]
 [ext_resource type="PackedScene" uid="uid://blbs5jbyvy4o0" path="res://Scenes/Entities/Player/player.tscn" id="9_fgyfe"]
+[ext_resource type="PackedScene" uid="uid://varswinkvv2k" path="res://Scenes/VFX/announcement.tscn" id="10_f1570"]
 [ext_resource type="Script" path="res://Scripts/World/WorldBoundaries.gd" id="10_orrba"]
 [ext_resource type="Script" path="res://Scripts/World/LevelManager.gd" id="11_2d06u"]
 
@@ -44,6 +45,8 @@ script = ExtResource("8_57uxh")
 
 [node name="Player" parent="." instance=ExtResource("9_fgyfe")]
 position = Vector2(652, 237)
+level_up_announcement = ExtResource("10_f1570")
+speed = 400
 
 [node name="WorldBoundaries" type="Node2D" parent="."]
 script = ExtResource("10_orrba")
@@ -81,3 +84,8 @@ script = ExtResource("11_2d06u")
 position = Vector2(1117, 91)
 seeking = NodePath("../Player")
 ground = NodePath("../WorldBoundaries/Floor")
+
+[connection signal="boss_fight" from="LevelManager" to="." method="_on_level_manager_boss_fight"]
+[connection signal="experience_change" from="LevelManager" to="UI" method="_on_level_manager_experience_change"]
+[connection signal="level_up" from="LevelManager" to="UI" method="_on_level_manager_level_up"]
+[connection signal="level_up" from="LevelManager" to="Player" method="_on_level_manager_level_up"]

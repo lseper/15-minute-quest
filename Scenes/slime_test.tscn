@@ -44,6 +44,7 @@ script = ExtResource("8_vy0s3")
 
 [node name="Player" parent="." instance=ExtResource("9_ulahs")]
 position = Vector2(652, 237)
+speed = 400
 
 [node name="WorldBoundaries" type="Node2D" parent="."]
 script = ExtResource("10_2qai1")
